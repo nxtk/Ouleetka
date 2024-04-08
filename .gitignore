@@ -56,3 +56,7 @@ node_modules
 # gerbers
 ergogen/output/gerbers/*/*
 !ergogen/output/gerbers/*/*.zip
+
+# datasheets and schematics
+doc/datasheets
+doc/example_schematics

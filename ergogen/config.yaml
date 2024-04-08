@@ -1,12 +1,12 @@
 meta:
-  engine: 4.0.4
+  engine: 4.0.5
   name: example
   version: 0.1
   # ref: &kb_ref "Example v0.1"
-  # author: &kb_author Example
+  # author: Example
   # url: &kb_url https://github.com/username/example-ergogen
 
-  fp_key_switch: &fp_key_switch "ceoloide/switch_choc_v1_v2"
+  fp_key_switch: &fp_key_switch ceoloide/switch_choc_v1_v2
   fp_reset_switch: &fp_reset_switch "ceoloide/reset_switch_smd_side"
   fp_power_switch: &fp_power_switch "ceoloide/power_switch_smd_side"
   fp_mounting_hole: &fp_mounting_hole "ceoloide/mounting_hole"
@@ -19,7 +19,6 @@ meta:
     $extends: presets.choc_v1
 
 presets:
-  # Original presets by Ceoloide https://github.com/ceoloide/corney-island
   # These presets provide different layout options
   # Select a preset in the `units` section below
   # Note: The appropriate switch footprint will still need to be set in the `pcb` section
@@ -76,8 +75,8 @@ units:
   screw_diameter: screw_radius * 2
   screw_head_radius: 2.05
   screw_head_diameter: screw_head_radius * 2
-  standoff_radius: 1.575 + 0.125 # M2 standoffs https://keeb.io/products/m2-screws-and-standoffs
-  standoff_diameter: standoff_radius * 2 # 3.15 + 0.25 for tolerances
+  standoff_radius: 2.15 # M2 standoffs
+  standoff_diameter: standoff_radius * 2
   fillet_radius: 0.5
   pwr_trace_width: 0.25
   gnd_trace_width: 0.25
@@ -107,13 +106,23 @@ points:
         middle.key:
           tags: [key_1u]
           column_net: C3
+          spread: kx + 4
+          stagger: 0.45kx
+          splay: 0
+          origin: [-0.5kx, -0.5ky]
         ring.key:
           tags: [key_1u]
           column_net: C2
-        pinky:
-          key:
-            tags: [key_1u]
-            column_net: C1
+          spread: kx + 6
+          stagger: -0.1kx
+          splay: -2.5
+          origin: [-0.5kx, -0.5ky]
+        pinky.key:
+          tags: [key_1u]
+          column_net: C1
+          spread: kx + 4.5
+          stagger: -0.55kx
+          splay: -2.5
         outer:
           key:
             tags: [key_1_25u]
@@ -123,12 +132,9 @@ points:
           rows:
             top.skip: true
       rows:
-        bottom:
-          row_net: R1
-        home:
-          row_net: R2
-        top:
-          row_net: R3
+        bottom.row_net: R2
+        home.row_net: R1
+        top.row_net: R0
 
     thumb:
       anchor:
@@ -148,8 +154,7 @@ points:
           stagger: 6
           splay: -12
           shift: [0.5, -2]
-      rows.home:
-        row_net: R0
+      rows.home.row_net: R3
 
     # helper points
     svg_viewport_fix1:
@@ -217,6 +222,30 @@ points:
               - ref: main_pinky_bottom
               - ref: main_outer_bottom
 
+    screw_left_top:
+      key.tags: [helper, screw, standoff]
+      anchor:
+        - aggregate:
+            parts:
+              - ref: main_inner_top
+              - ref: main_index_top
+          shift: [0.5, -6.35]
+
+    screw_left_bottom:
+      key.tags: [helper, screw, standoff]
+      anchor:
+        - aggregate:
+            parts:
+              - ref: main_inner_home
+              - ref: main_index_home
+          shift: [-0.5, -10.65]
+
+    screw_left_thumb:
+      key.tags: [helper, screw, standoff]
+      anchor:
+        - ref: thumb_outer_home
+          shift: [0.5kx + 0.75, -1.85]
+
     screw_mcu_top_right:
       key.tags: [helper, screw]
       anchor:
@@ -230,16 +259,11 @@ points:
           shift: [2, 2.4]
 
     tp_center:
-      key.tags: [helper]
       anchor:
-        aggregate:
-          parts:
-            - ref: main_middle_top
-            - ref: main_ring_top
-            - ref: main_middle_home
-            - ref: main_ring_home
-        shift: [0, 0]
-        rotate: 0
+        ref: main_middle_home
+        shift: [11.9, -9.38]
+        rotate: -2.575
+      key.tags: [helper]
 
     screw_tp_top:
       key.tags: [helper, screw]
@@ -323,7 +347,6 @@ outlines:
       size: [kch - 2.5, 1.5kcw - 2.5]
       corner: 1
       operation: stack
-
   _screws:
     - what: circle
       where: [screw]
@@ -350,6 +373,105 @@ outlines:
     - what: circle
       where: tp_center
       radius: 20.55
+
+  _outline_shape_thumb_addon:
+    - what: circle
+      where: main_middle_home
+      radius: 140
+      adjust:
+        shift: [-76.5, 72.8]
+      operation: stack
+    - what: rectangle
+      where: main_inner_home
+      size: [400, 250]
+      adjust:
+        shift: [0, 100]
+      operation: subtract
+    - what: rectangle
+      where: main_inner_bottom
+      size: [100, 100]
+      adjust:
+        shift: [-85, -35]
+      operation: subtract
+
+  _outline_shape_inner_curve:
+    - what: circle
+      where: main_middle_home
+      radius: 44
+      adjust:
+        shift: [24.2, -82.8]
+    - what: rectangle
+      where: main_middle_bottom
+      size: [20, 7]
+      adjust:
+        shift: [20, -18.65]
+      operation: subtract
+
+  _main_raw:
+    - what: rectangle
+      where: main_inner_home
+      size: [180, 140]
+      adjust:
+        shift: [40, 38.5]
+    - what: circle
+      where: main_middle_home
+      operation: intersect
+      radius: 160
+      adjust:
+        shift: [2, -134.25]
+    - +_outline_shape_thumb_addon
+    - what: rectangle
+      where: main_inner_home
+      size: [40, 50]
+      adjust:
+        shift: [-48.1, 25]
+      operation: subtract
+    - what: circle
+      where: main_inner_home
+      radius: 200
+      adjust:
+        shift: [-227.25, 5]
+      operation: subtract
+    - what: rectangle
+      where: thumb_outer_home
+      size: [20, 60]
+      adjust:
+        shift: [-20/2 - 0.5kx, 0]
+      operation: subtract
+    - what: rectangle
+      where: main_outer_home
+      size: [40, 115]
+      adjust:
+        shift: [40/2 + 0.5kx, -25]
+      operation: subtract
+
+  _main_curve_inner_corner0:
+    - what: rectangle
+      where: main_middle_bottom
+      size: [40, 20]
+      adjust:
+        rotate: 17
+        shift: [8, -18]
+    - what: outline
+      name: _main_raw
+      operation: intersect
+
+  _main_curve_inner_corner1:
+    - what: outline
+      name: _main_curve_inner_corner0
+      fillet: 15
+
+  _main0:
+    - what: outline
+      name: _main_raw
+      fillet: 1.75
+    - what: outline
+      name: _main_curve_inner_corner1
+
+  _main:
+    - what: outline
+      name: _main0
+      expand: 0.5
 
   _mcu_raw:
     - what: rectangle
@@ -386,10 +508,12 @@ outlines:
     - ^_screws
     - ^_switches
     - ^_standoffs
+    - ^_main_raw
     - ^_mcu
     - ^_tentingpuck
 
   preview:
     - ^_viewport_fix
     - ^_keycaps
+    - ^_main
     - ^_mcu
