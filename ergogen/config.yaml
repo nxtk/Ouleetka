@@ -1,91 +1,63 @@
 meta:
   engine: 4.0.5
-  name: example
+  name: ouleetka
   version: 0.1
-  # ref: &kb_ref "Example v0.1"
-  # author: Example
-  # url: &kb_url https://github.com/username/example-ergogen
+  ref: "ouleetka v0.1"
+  author: nxtk
+  url: https://github.com/nxtk/ouleetka
 
-  fp_key_switch: &fp_key_switch ceoloide/switch_choc_v1_v2
-  fp_reset_switch: &fp_reset_switch "ceoloide/reset_switch_smd_side"
-  fp_power_switch: &fp_power_switch "ceoloide/power_switch_smd_side"
-  fp_mounting_hole: &fp_mounting_hole "ceoloide/mounting_hole"
-  fp_mcu: &fp_mcu "ceoloide/nice_nano"
-  fp_oled: &fp_oled "ceoloide/display_ssd1306_nice_view"
-  fp_battery_connector: &fp_fp_battery_connector "ceoloide/battery_connector_jst_ph_2"
-  fp_diode: &fp_diode "ceoloide/diode_tht_sod123"
+  footprints:
+    key_switch: &fp_key_switch ceoloide/switch_choc_v1_v2
+    reset_switch: &fp_reset_switch "ceoloide/reset_switch_smd_side"
+    power_switch: &fp_power_switch "ceoloide/power_switch_smd_side"
+    mounting_hole: &fp_mounting_hole "ceoloide/mounting_hole"
+    mcu: &fp_mcu "ceoloide/nice_nano"
+    oled: &fp_oled "ceoloide/display_ssd1306_nice_view"
+    battery_connector: &fp_fp_battery_connector "ceoloide/battery_connector_jst_ph_2"
+    diode: &fp_diode "ceoloide/diode_tht_sod123"
 
-  switch:
-    $extends: presets.choc_v1
-
-presets:
-  # These presets provide different layout options
-  # Select a preset in the `units` section below
-  # Note: The appropriate switch footprint will still need to be set in the `pcb` section
-  mx:
-    # Key and keycap measures
-    kx: u # spacing between key centers (X-axis)
-    ky: u # spacing between key centers (Y-axis)
-    kcow: 14 # key cutout hole width (cherry: 14, choc: 13.8)
-    kcoh: 14 # key cutout hole height (cherry: 14, choc: 13.8)
-    keycw: 18 # keycap width (cherry: 18, choc: 17.5, choc CFX 16.5)
-    keych: 18 # keycap height (cherry: 18, choc: 16.5, choc CFX 16.5)
-    led_pos_x: 0 # Led X position relative to the switch center
-    led_pos_y: -4.75 # Led Y position relative to the switch center
-    led_rotation: 180 # Led rotation
-    vertical_underglow_shift: -0.5 kp # How much to shift underglow leds tied to keys
-    vertical_diode_shift: 1.325 # How much to shift to avoid overlap
-    horizontal_diode_shift: 7.4
-    diode_rotation: 0 # Diode rotation
-    switch_rotation: 0 # Hotswap north, led south
-    # Switch specific case variables
-    top_plate_thickness: 1.6
-    internal_distance_to_top_plate: 5
-
-  choc_v1:
-    # Key and keycap measures
-    u: 17
-    U: 17
-    kx: 17 # spacing between key centers (X-axis)
-    ky: 17 # spacing between key centers (Y-axis)
-    kcow: 13.8 # key cutout hole width (cherry, choc v2: 14, choc v1: 13.8)
-    kcoh: 13.8 # key cutout hole height (cherry, choc v2: 14, choc v1: 13.8)
-    kcw: 16.5 # keycap width (cherry: 18, choc: 17.5, choc CFX 16.5)
-    kch: 16.5 # keycap height (cherry: 18, choc: 16.5, choc CFX 16.5)
-    tkch: 1.25kch # thumb keycap height
-    led_pos_x: 0 # Led X position relative to the switch center
-    led_pos_y: 4.7 # Led Y position relative to the switch center
-    led_rotation: 0 # Led rotation
-    vertical_underglow_shift: -kx + 7.8 # How much to shift underglow leds tied to keys
-    vertical_diode_shift: 1.5 # How much to shift to avoid overlap
-    horizontal_diode_shift: -0.5 kcow - 0.85
-    diode_rotation: 0 # Diode rotation
-    switch_rotation: 180 # Hotswap south, led north
-    # Switch specific case variables
-    top_plate_thickness: 1.3
-    internal_distance_to_top_plate: 2.2
 units:
-  # The following statements will make the content of the preset
-  # available in the units context
-  $extends: meta.switch
   $default_autobind: 0
+  small_tolerance: 0.15
+  medium_tolerance: 0.25
+  large_tolerance: 0.5
+
+  u: 17
+  U: 17
+  kx: 17 # spacing between key centers (X-axis)
+  ky: 17 # spacing between key centers (Y-axis)
+  kco: 13.8 # key cutout hole width (cherry, choc v2: 14, choc v1: 13.8)
+  kch: 16.5 # keycap height (cherry: 18, choc: 16.5, choc CFX 16.5)
+  kcw: 16.5 # keycap width (cherry: 18, choc: 17.5, choc CFX 16.5)
+
+  led_pos_x: 0 # Led X position relative to the switch center
+  led_pos_y: 4.7 # Led Y position relative to the switch center
+  led_rotation: 0 # Led rotation
+
+  vertical_underglow_shift: -kx + 7.8 # How much to shift underglow leds tied to keys
+  vertical_diode_shift: 1.5 # How much to shift to avoid overlap
+  horizontal_diode_shift: -0.5 kco - 0.85
+
+  diode_rotation: 0 # Diode rotation
+  switch_rotation: 180 # Hotswap south, led north
+
+  top_plate_thickness: 1.3
+  internal_distance_to_top_plate: 2.2
 
   # Physical measures
-  screw_radius: 1.1 # M2 screws
+  screw_radius: 1 + small_tolerance / 2 # M2 screws
   screw_diameter: screw_radius * 2
   screw_head_radius: 2.05
   screw_head_diameter: screw_head_radius * 2
-  standoff_radius: 2.15 # M2 standoffs
-  standoff_diameter: standoff_radius * 2
-  fillet_radius: 0.5
-  pwr_trace_width: 0.25
+  standoff_radius: 1.575 + small_tolerance / 2 # M2 standoffs https://keeb.io/products/m2-screws-and-standoffs
+  standoff_diameter: standoff_radius * 2 # 3.15 + 0.2
+  pwr_trace_width: 0.25 # 1A(0.25mm), 2A(0.8mm)
   gnd_trace_width: 0.25
   signal_trace_width: 0.15
   via_size: 0.56 # JLCPCB min 0.56 | KiCad default 0.8
   via_drill: 0.3 # JLCPCB min 0.3 | KiCad default 0.4
 
   case_wall_thickness: 0.5
-  pcb_to_case_wall_tolerance: 0.25
   bottom_plate_thickness: 1.0
   internal_distance_to_bottom_plate: 4
 
@@ -130,6 +102,12 @@ points:
             stagger: 0.5ky
             padding: 1.25ky
           rows:
+            home:
+              adjust:
+                rotate: -90
+            bottom:
+              adjust:
+                rotate: -90
             top.skip: true
       rows:
         bottom.row_net: R2
@@ -143,6 +121,7 @@ points:
         rotate: 12
       key:
         tags: [key, thumb_key, key_1_25u]
+        rotate: -90
         origin: [-0.5kx, -0.5ky]
 
       columns:
@@ -169,8 +148,103 @@ points:
         ref: main_inner_bottom
         shift: [-45, -55]
 
+    screw_mount_center:
+      key.tags: [helper, screw]
+      anchor:
+        - ref: main_middle_home
+          shift: [11.95, -10]
+
+    screw_mount_tr:
+      key.tags: [helper, screw]
+      anchor:
+        - ref: screw_mount_center
+          shift: [22.5, 22.5]
+
+    screw_mount_br:
+      key.tags: [helper, screw]
+      anchor:
+        - ref: screw_mount_center
+          shift: [22.5, -22.5]
+
+    screw_mount_tl:
+      key.tags: [helper, screw]
+      anchor:
+        - ref: screw_mount_center
+          shift: [-22.5, 22.5]
+
+    screw_mount_bl:
+      key.tags: [helper, screw]
+      anchor:
+        - ref: screw_mount_center
+          shift: [-22.5, -22.5]
+
+    standoff_middle_thumb:
+      key.tags: [helper, screw, standoff]
+      anchor:
+        - ref: thumb_middle_home
+          shift: [-2, 0.5kx + 0.7]
+
+    standoff_lt:
+      key.tags: [helper, standoff, screw]
+      anchor:
+        - aggregate:
+            parts:
+              - ref: main_inner_top
+              - ref: main_index_top
+              - ref: main_inner_home
+              - ref: main_index_home
+
+    standoff_lb:
+      key.tags: [helper, standoff, screw]
+      anchor:
+        - aggregate:
+            parts:
+              - ref: main_inner_home
+              - ref: main_index_home
+              - ref: main_inner_bottom
+              - ref: main_index_bottom
+
+    standoff_rtr:
+      key.tags: [helper, standoff, screw]
+      anchor:
+        - aggregate:
+            parts:
+              - ref: main_pinky_top
+              - ref: main_pinky_home
+          shift: [0.5kx - 0.55, 0]
+
+    standoff_rbr:
+      key.tags: [helper, standoff, screw]
+      anchor:
+        - aggregate:
+            parts:
+              - ref: main_pinky_home
+              - ref: main_pinky_bottom
+          shift: [0.5kx - 0.55, 0]
+
+    standoff_rtl:
+      key.tags: [helper, standoff, screw]
+      anchor:
+        - aggregate:
+            parts:
+              - ref: main_pinky_top
+              - ref: main_pinky_home
+          shift: [-0.5kx + 0.55, 0]
+
+    standoff_rbl:
+      key.tags: [helper, standoff, screw]
+      anchor:
+        - aggregate:
+            parts:
+              - ref: main_pinky_home
+              - ref: main_pinky_bottom
+          shift: [-0.5kx + 0.55, 0]
+
     mcu_top_right:
-      key.tags: [helper]
+      key:
+        tags: [helper]
+        height: 0
+        width: 0
       anchor:
         ref: main_inner_top
         shift: [-0.5kx - mcu_margin_right, 0.5ky - mcu_margin_top]
@@ -202,92 +276,23 @@ points:
             - ref: mcu_top_right
             - ref: mcu_bottom_right
 
-    screw_right_top:
+    screw_mcu_right:
       key.tags: [helper, screw, standoff]
-      anchor:
-        - aggregate:
-            parts:
-              - ref: main_pinky_top
-              - ref: main_outer_top
-              - ref: main_pinky_home
-              - ref: main_outer_home
-
-    screw_right_bottom:
-      key.tags: [helper, screw, standoff]
-      anchor:
-        - aggregate:
-            parts:
-              - ref: main_pinky_home
-              - ref: main_outer_home
-              - ref: main_pinky_bottom
-              - ref: main_outer_bottom
-
-    screw_left_top:
-      key.tags: [helper, screw, standoff]
-      anchor:
-        - aggregate:
-            parts:
-              - ref: main_inner_top
-              - ref: main_index_top
-          shift: [0.5, -6.35]
-
-    screw_left_bottom:
-      key.tags: [helper, screw, standoff]
-      anchor:
-        - aggregate:
-            parts:
-              - ref: main_inner_home
-              - ref: main_index_home
-          shift: [-0.5, -10.65]
-
-    screw_left_thumb:
-      key.tags: [helper, screw, standoff]
-      anchor:
-        - ref: thumb_outer_home
-          shift: [0.5kx + 0.75, -1.85]
-
-    screw_mcu_top_right:
-      key.tags: [helper, screw]
       anchor:
         - ref: mcu_top_right
-          shift: [-2, 2.4]
+          shift: [-2.5, 2.25]
 
-    screw_mcu_top_left:
+    screw_mcu_left:
+      key.tags: [helper, screw, standoff]
+      anchor:
+        - ref: mcu_bottom_left
+          shift: [2.5, -2.25]
+
+    screw_outer_thumb:
       key.tags: [helper, screw]
       anchor:
-        - ref: mcu_top_left
-          shift: [2, 2.4]
-
-    tp_center:
-      anchor:
-        ref: main_middle_home
-        shift: [11.9, -9.38]
-        rotate: -2.575
-      key.tags: [helper]
-
-    screw_tp_top:
-      key.tags: [helper, screw]
-      anchor:
-        ref: tp_center
-        shift: [0, 19.05]
-
-    screw_tp_bottom:
-      key.tags: [helper, screw]
-      anchor:
-        ref: tp_center
-        shift: [0, -19.05]
-
-    screw_tp_left:
-      key.tags: [helper, screw]
-      anchor:
-        ref: tp_center
-        shift: [-19.05, 0]
-
-    screw_tp_right:
-      key.tags: [helper, screw]
-      anchor:
-        ref: tp_center
-        shift: [19.05, 0]
+        - ref: screw_mcu_left
+          shift: [0, -14]
 
 outlines:
   _viewport_fix:
@@ -302,18 +307,42 @@ outlines:
       operation: stack
     - what: rectangle
       where: [key_1_25u]
-      size: [kx, 1.25ky]
+      size: [1.25ky, kx]
       operation: stack
     - what: rectangle
       where: [key_1_5u]
-      size: [kx, 1.5ky]
+      size: [1.5ky, kx]
       operation: stack
 
   _keycaps:
     # center dot
+    - what: rectangle
+      where: [key]
+      #operation: stack
+      size: [10, 4]
+      adjust:
+        shift: [0, 0]
+    - what: rectangle
+      where: [key]
+      size: [3.2, 4]
+      adjust:
+        shift: [0, -1.2]
     - what: circle
       where: [key]
-      radius: 0.25
+      operation: stack
+      radius: 1.6
+    - what: rectangle
+      where: [key]
+      operation: stack
+      size: [1.2, 3]
+      adjust:
+        shift: [-2.85, 0]
+    - what: rectangle
+      where: [key]
+      operation: stack
+      size: [1.2, 3]
+      adjust:
+        shift: [2.85, 0]
       # 1u
     - what: rectangle
       where: [key_1u]
@@ -322,31 +351,39 @@ outlines:
       corner: 1.5
     - what: rectangle
       where: [key_1u]
+      operation: stack
       size: [kch - 2.5, kcw - 2.5]
       corner: 1
-      operation: stack
       # 1.25u
     - what: rectangle
       where: [key_1_25u]
       operation: stack
       size: [kch, 1.25kcw]
       corner: 1.5
+      adjust:
+        rotate: -90
     - what: rectangle
       where: [key_1_25u]
+      operation: stack
       size: [kch - 2.5, 1.25kcw - 2.5]
       corner: 1
-      operation: stack
+      adjust:
+        rotate: -90
       # 1.5u
     - what: rectangle
       where: [key_1_5u]
       operation: stack
       size: [kch, 1.5kcw]
       corner: 1.5
+      adjust:
+        rotate: -90
     - what: rectangle
       where: [key_1_5u]
+      operation: stack
       size: [kch - 2.5, 1.5kcw - 2.5]
       corner: 1
-      operation: stack
+      adjust:
+        rotate: -90
   _screws:
     - what: circle
       where: [screw]
@@ -367,7 +404,12 @@ outlines:
   _switches:
     - what: rectangle
       where: [key]
-      size: [kcow, kcoh]
+      size: 15
+
+  _switch_cutouts:
+    - what: rectangle
+      where: [key]
+      size: kco
 
   _tentingpuck:
     - what: circle
@@ -379,7 +421,7 @@ outlines:
       where: main_middle_home
       radius: 140
       adjust:
-        shift: [-76.5, 72.8]
+        shift: [-76.5, 72.5]
       operation: stack
     - what: rectangle
       where: main_inner_home
@@ -412,7 +454,7 @@ outlines:
       where: main_inner_home
       size: [180, 140]
       adjust:
-        shift: [40, 38.5]
+        shift: [40, 39.25]
     - what: circle
       where: main_middle_home
       operation: intersect
@@ -422,28 +464,56 @@ outlines:
     - +_outline_shape_thumb_addon
     - what: rectangle
       where: main_inner_home
+      operation: subtract
       size: [40, 50]
       adjust:
         shift: [-48.1, 25]
-      operation: subtract
     - what: circle
       where: main_inner_home
+      operation: subtract
       radius: 200
       adjust:
         shift: [-227.25, 5]
-      operation: subtract
     - what: rectangle
       where: thumb_outer_home
-      size: [20, 60]
-      adjust:
-        shift: [-20/2 - 0.5kx, 0]
       operation: subtract
+      size: [60, 20]
+      adjust:
+        shift: [0, -20/2 - 0.5ky]
     - what: rectangle
       where: main_outer_home
-      size: [40, 115]
-      adjust:
-        shift: [40/2 + 0.5kx, -25]
       operation: subtract
+      size: [115, 40]
+      adjust:
+        shift: [0, 40/2 + 0.5ky]
+    # - what: rectangle
+    #   where: mcu_top_left
+    #   operation: add
+    #   size: [20, 5]
+    #   adjust:
+    #     shift: [8.5, 2]
+    # - what: rectangle
+    #   where: mcu_top_left
+    #   operation: subtract
+    #   size: [10, 20]
+    #   adjust:
+    #     shift: [-5.3, -4.5]
+    # - what: rectangle
+    #   where: mcu_top_left
+    #   operation: subtract
+    #   size: [20, 10]
+    #   adjust:
+    #     shift: [8.5, 9]
+    # - what: rectangle
+    #   where:
+    #     aggregate:
+    #       parts:
+    #         - ref: mcu_top_left
+    #         - ref: mcu_top_right
+    #   operation: subtract
+    #   size: [7.5, 5]
+    #   adjust:
+    #     shift: [0, 2.75]
 
   _main_curve_inner_corner0:
     - what: rectangle
@@ -464,7 +534,7 @@ outlines:
   _main0:
     - what: outline
       name: _main_raw
-      fillet: 1.75
+      fillet: 1.5
     - what: outline
       name: _main_curve_inner_corner1
 
@@ -501,19 +571,25 @@ outlines:
       adjust:
         shift: [1.15, 1.15]
 
+  edgecut:
+    - ^_main
+
   debug_preview:
     - ^_viewport_fix
     - ^_grid
     - ^_debug_points
-    - ^_screws
     - ^_switches
-    - ^_standoffs
+    - ^_switch_cutouts
     - ^_main_raw
     - ^_mcu
-    - ^_tentingpuck
+    - ^_screws
+    - ^_standoffs
+    #- ^_screwheads
 
   preview:
     - ^_viewport_fix
     - ^_keycaps
-    - ^_main
+    #- ^_edgecut
     - ^_mcu
+    #- ^_switches
+    - ^_screwheads
