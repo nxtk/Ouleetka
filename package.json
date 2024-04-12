@@ -8,8 +8,8 @@
     "build": "ergogen ./ergogen/ --output ./ergogen/output && ./script/convertdxf.sh",
     "debug": "ergogen ./ergogen/ --output ./ergogen/output --clear --debug",
     "clear": "rm -rfv ./ergogen/output/*",
-    "watch:build": "nodemon -e yaml -x \"npm run build\"",
-    "watch:debug": "nodemon -e yaml -x \"npm run debug\""
+    "watch:build": "nodemon -e yaml,js -x \"npm run build\"",
+    "watch:debug": "nodemon -e yaml,js -x \"npm run debug\""
     
   },
   "nodemonConfig": {

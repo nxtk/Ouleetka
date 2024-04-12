@@ -7,20 +7,23 @@ meta:
   url: https://github.com/nxtk/ouleetka
 
   footprints:
+    #template: &kicad_template "kicad5"
+    template: &kicad_template "kicad8_1"
     key_switch: &fp_key_switch ceoloide/switch_choc_v1_v2
     reset_switch: &fp_reset_switch "ceoloide/reset_switch_smd_side"
     power_switch: &fp_power_switch "ceoloide/power_switch_smd_side"
     mounting_hole: &fp_mounting_hole "ceoloide/mounting_hole"
-    mcu: &fp_mcu "ceoloide/nice_nano"
-    oled: &fp_oled "ceoloide/display_ssd1306_nice_view"
-    battery_connector: &fp_fp_battery_connector "ceoloide/battery_connector_jst_ph_2"
+    mcu: &fp_mcu "ceoloide/mcu_nice_nano"
+    display_nicenano: &fp_display_niceview "ceoloide/display_nice_view"
+    display_oled: &fp_display_oled "ceoloide/display_ssd1306"
+    battery_connector: &fp_battery_connector "ceoloide/battery_connector_jst_ph_2"
     diode: &fp_diode "ceoloide/diode_tht_sod123"
 
 units:
   $default_autobind: 0
-  small_tolerance: 0.15
-  medium_tolerance: 0.25
-  large_tolerance: 0.5
+  tolerance_small: 0.15
+  tolerance_medium: 0.25
+  tolerance_high: 0.5
 
   u: 17
   U: 17
@@ -45,11 +48,11 @@ units:
   internal_distance_to_top_plate: 2.2
 
   # Physical measures
-  screw_radius: 1 + small_tolerance / 2 # M2 screws
+  screw_radius: 1 + tolerance_small / 2 # M2 screws
   screw_diameter: screw_radius * 2
   screw_head_radius: 2.05
   screw_head_diameter: screw_head_radius * 2
-  standoff_radius: 1.575 + small_tolerance / 2 # M2 standoffs https://keeb.io/products/m2-screws-and-standoffs
+  standoff_radius: 1.575 + tolerance_small / 2 # M2 standoffs https://keeb.io/products/m2-screws-and-standoffs
   standoff_diameter: standoff_radius * 2 # 3.15 + 0.2
   pwr_trace_width: 0.25 # 1A(0.25mm), 2A(0.8mm)
   gnd_trace_width: 0.25
@@ -61,58 +64,63 @@ units:
   bottom_plate_thickness: 1.0
   internal_distance_to_bottom_plate: 4
 
-  mcu_margin_right: 0.5
-  mcu_margin_top: 0.55kx
-
 points:
   zones:
     main:
-      anchor.shift: [100, -100] # Fix KiCad placement
-      key.tags: [main_key, key]
+      anchor:
+        shift: [100, -100] # Fix KiCad placement
+      key:
+        tags: 
+        - key
       columns:
-        inner.key:
-          tags: [key_1u]
-        index.key:
-          tags: [key_1u]
-          column_net: C4
-        middle.key:
-          tags: [key_1u]
-          column_net: C3
-          spread: kx + 4
-          stagger: 0.45kx
-          splay: 0
-          origin: [-0.5kx, -0.5ky]
-        ring.key:
-          tags: [key_1u]
-          column_net: C2
-          spread: kx + 6
-          stagger: -0.1kx
-          splay: -2.5
-          origin: [-0.5kx, -0.5ky]
-        pinky.key:
-          tags: [key_1u]
-          column_net: C1
-          spread: kx + 4.5
-          stagger: -0.55kx
-          splay: -2.5
+        inner:
+          key:
+            column_net: C5
+        index:
+          key:
+            column_net: C4
+        middle:
+          key:
+            column_net: C3
+            spread: kx + 4
+            stagger: 0.45kx
+            splay: 0
+            origin: [-0.5kx, -0.5ky]
+        ring:
+          key:
+            column_net: C2
+            spread: kx + 6
+            stagger: -0.1kx
+            splay: -2.5
+            origin: [-0.5kx, -0.5ky]
+        pinky:
+          key:
+            column_net: C1
+            spread: kx + 4.5
+            stagger: -0.55kx
+            splay: -2.5
         outer:
           key:
-            tags: [key_1_25u]
             column_net: C0
             stagger: 0.5ky
             padding: 1.25ky
           rows:
+            top:
+              skip: true
             home:
               adjust:
-                rotate: -90
+                rotate: 90
             bottom:
               adjust:
-                rotate: -90
-            top.skip: true
+                rotate: 90
+
       rows:
-        bottom.row_net: R2
-        home.row_net: R1
-        top.row_net: R0
+        bottom:
+          row_net: R2
+        home:
+          row_net: R1
+        top:
+          row_net: R0
 
     thumb:
       anchor:
@@ -120,20 +128,29 @@ points:
         shift: [-1.3kx, -1.8ky]
         rotate: 12
       key:
-        tags: [key, thumb_key, key_1_25u]
-        rotate: -90
+        tags: [key]
+        rotate: 90
         origin: [-0.5kx, -0.5ky]
 
       columns:
-        outer.key:
-        middle.key:
-          stagger: 3
-          splay: -3
-        inner.key:
-          stagger: 6
-          splay: -12
-          shift: [0.5, -2]
-      rows.home.row_net: R3
+        outer:
+          key:
+            column_net: C5
+        middle:
+          key:
+            column_net: C4
+            stagger: 3
+            splay: -3
+        inner:
+          key:
+            column_net: C3
+            stagger: 6
+            splay: -12
+            shift: [0.5, -2]
+
+      rows:
+        thome:
+          row_net: R3
 
     # helper points
     svg_viewport_fix1:
@@ -181,7 +198,7 @@ points:
     standoff_middle_thumb:
       key.tags: [helper, screw, standoff]
       anchor:
-        - ref: thumb_middle_home
+        - ref: thumb_middle_thome
           shift: [-2, 0.5kx + 0.7]
 
     standoff_lt:
@@ -247,7 +264,7 @@ points:
         width: 0
       anchor:
         ref: main_inner_top
-        shift: [-0.5kx - mcu_margin_right, 0.5ky - mcu_margin_top]
+        shift: [-0.5kx - 1.5, 0.5ky - 7.5]
 
     mcu_top_left:
       key.tags: [helper]
@@ -259,12 +276,12 @@ points:
       key.tags: [helper]
       anchor:
         ref: mcu_top_right
-        shift: [0, -33.4]
+        shift: [0, -33]
     mcu_bottom_left:
       key.tags: [helper]
       anchor:
         ref: mcu_top_left
-        shift: [0, -33.4]
+        shift: [0, -33]
 
     mcu_center:
       key.tags: [helper]
@@ -276,23 +293,54 @@ points:
             - ref: mcu_top_right
             - ref: mcu_bottom_right
 
-    screw_mcu_right:
+    screw_mcu_cover_top:
       key.tags: [helper, screw, standoff]
       anchor:
         - ref: mcu_top_right
-          shift: [-2.5, 2.25]
+          shift: [-1.25, 2.5]
 
-    screw_mcu_left:
+    screw_mcu_cover_bottom:
       key.tags: [helper, screw, standoff]
       anchor:
         - ref: mcu_bottom_left
-          shift: [2.5, -2.25]
+          shift: [1.5, -6.5]
 
     screw_outer_thumb:
       key.tags: [helper, screw]
       anchor:
-        - ref: screw_mcu_left
+        - ref: screw_mcu_cover_bottom
           shift: [0, -14]
+
+    display_connector:
+      key.tags: [helper]
+      anchor:
+        aggregate:
+          parts:
+            - ref: mcu_bottom_left
+            - ref: mcu_bottom_right
+        # approximate jst socket height 2.6, width 2.54
+        shift: [0, -2.6/2 - 0.25 - tolerance_medium]
+
+    power_switch:
+      key.tags: [helper]
+      anchor:
+        aggregate:
+          parts:
+            - ref: mcu_top_left
+            - ref: mcu_top_right
+        shift: [0, -0.250]
+    
+    battery_connector:
+      key.tags: [helper]
+      anchor:
+        - ref: mcu_center
+          shift: [-3, -27.2]
+
+    reset_switch:
+      key.tags: [helper]
+      anchor:
+        - ref: mcu_top_right
+          shift: [0, 0]
 
 outlines:
   _viewport_fix:
@@ -302,23 +350,18 @@ outlines:
 
   _grid:
     - what: rectangle
-      where: [key_1u]
+      where: [/^main_(?!outer).*$/]
       size: [kx, ky]
       operation: stack
     - what: rectangle
-      where: [key_1_25u]
+      where: [/^(main_outer|thumb).*/]
       size: [1.25ky, kx]
-      operation: stack
-    - what: rectangle
-      where: [key_1_5u]
-      size: [1.5ky, kx]
       operation: stack
 
   _keycaps:
     # center dot
     - what: rectangle
       where: [key]
-      #operation: stack
       size: [10, 4]
       adjust:
         shift: [0, 0]
@@ -345,45 +388,31 @@ outlines:
         shift: [2.85, 0]
       # 1u
     - what: rectangle
-      where: [key_1u]
+      where: [/^main_(?!outer).*$/]
       operation: stack
       size: [kch, kcw]
       corner: 1.5
     - what: rectangle
-      where: [key_1u]
+      where: [/^main_(?!outer).*$/]
       operation: stack
       size: [kch - 2.5, kcw - 2.5]
       corner: 1
       # 1.25u
     - what: rectangle
-      where: [key_1_25u]
+      where: [/^(main_outer|thumb).*$/]
       operation: stack
       size: [kch, 1.25kcw]
       corner: 1.5
       adjust:
         rotate: -90
     - what: rectangle
-      where: [key_1_25u]
+      where: [/^(main_outer|thumb).*$/]
       operation: stack
       size: [kch - 2.5, 1.25kcw - 2.5]
       corner: 1
       adjust:
         rotate: -90
-      # 1.5u
-    - what: rectangle
-      where: [key_1_5u]
-      operation: stack
-      size: [kch, 1.5kcw]
-      corner: 1.5
-      adjust:
-        rotate: -90
-    - what: rectangle
-      where: [key_1_5u]
-      operation: stack
-      size: [kch - 2.5, 1.5kcw - 2.5]
-      corner: 1
-      adjust:
-        rotate: -90
+        
   _screws:
     - what: circle
       where: [screw]
@@ -467,53 +496,25 @@ outlines:
       operation: subtract
       size: [40, 50]
       adjust:
-        shift: [-48.1, 25]
+        shift: [-48.3, 25] # shift: [-49.6, 25]
     - what: circle
       where: main_inner_home
       operation: subtract
       radius: 200
       adjust:
-        shift: [-227.25, 5]
+        shift: [-228.25, 0]
     - what: rectangle
-      where: thumb_outer_home
+      where: thumb_outer_thome
       operation: subtract
       size: [60, 20]
       adjust:
-        shift: [0, -20/2 - 0.5ky]
+        shift: [0, 20/2 + 0.5ky]
     - what: rectangle
       where: main_outer_home
       operation: subtract
       size: [115, 40]
       adjust:
-        shift: [0, 40/2 + 0.5ky]
-    # - what: rectangle
-    #   where: mcu_top_left
-    #   operation: add
-    #   size: [20, 5]
-    #   adjust:
-    #     shift: [8.5, 2]
-    # - what: rectangle
-    #   where: mcu_top_left
-    #   operation: subtract
-    #   size: [10, 20]
-    #   adjust:
-    #     shift: [-5.3, -4.5]
-    # - what: rectangle
-    #   where: mcu_top_left
-    #   operation: subtract
-    #   size: [20, 10]
-    #   adjust:
-    #     shift: [8.5, 9]
-    # - what: rectangle
-    #   where:
-    #     aggregate:
-    #       parts:
-    #         - ref: mcu_top_left
-    #         - ref: mcu_top_right
-    #   operation: subtract
-    #   size: [7.5, 5]
-    #   adjust:
-    #     shift: [0, 2.75]
+        shift: [0, -40/2 - 0.5ky]
 
   _main_curve_inner_corner0:
     - what: rectangle
@@ -543,15 +544,50 @@ outlines:
       name: _main0
       expand: 0.5
 
+  _usb: 
+    - what: rectangle
+      where:
+        aggregate:
+          parts:
+            - ref: mcu_top_left
+            - ref: mcu_top_right
+      size: [12, 2]
+
   _mcu_raw:
     - what: rectangle
       where: mcu_center
-      size: [18, 33.4]
+      size: [18, 33]
 
   _mcu:
     - what: outline
       name: _mcu_raw
       fillet: 1.75
+
+  _display:
+    - what: rectangle
+      where: display_connector
+      operation: stack
+      size: [14, 36]
+      adjust:
+        shift: [0, 36/2 - 1.3]
+    - what: rectangle
+      where: display_connector
+      operation: stack
+      size: [12, 38]
+      adjust:
+        shift: [0, 38/2 - 2 - 1.3]
+    - what: rectangle
+      where: display_connector
+      operation: stack
+      size: [12.820, 2.6]
+      adjust:
+        shift: [0, 0]
+    - what: rectangle
+      where: display_connector
+      operation: stack
+      size: [10.280, 2.6]
+      adjust:
+        shift: [0, -2]
 
   _debug_points:
     - what: rectangle
@@ -571,25 +607,220 @@ outlines:
       adjust:
         shift: [1.15, 1.15]
 
-  edgecut:
+  _debug_points2:
+    - what: circle
+      where: true
+      radius: 0.01
+
+  pcb:
     - ^_main
+
+  stuff:
+    - ^_keycaps
+    - ^_mcu
+    #- ^_switches
+    #- ^_screwheads
 
   debug_preview:
     - ^_viewport_fix
-    - ^_grid
     - ^_debug_points
-    - ^_switches
-    - ^_switch_cutouts
+    - ^_grid
     - ^_main_raw
-    - ^_mcu
+    - ^_mcu_raw
+    - ^_usb
     - ^_screws
     - ^_standoffs
     #- ^_screwheads
+    - ^_switches
+    - ^_switch_cutouts
+    - ^_display
 
   preview:
     - ^_viewport_fix
     - ^_keycaps
-    #- ^_edgecut
     - ^_mcu
+    - ^_usb
+    - ^_standoffs
+    #- ^_screwheads
+    - ^_display
+    - ^pcb
     #- ^_switches
-    - ^_screwheads
+  
+  _test:
+    - what: rectangle
+      where: mcu_center
+      size: [40, 40]
+
+pcbs:
+  ouleetka:
+    outlines:
+      main:
+        outline: pcb
+    template: *kicad_template
+    params:
+      secret: 42
+    footprints:
+      key_switches_1u:
+        what: *fp_key_switch
+        where: [/^main_(?!(outer|inner)).*$/]
+        params:
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+          side: "F"
+          hotswap: true
+          solder: false
+          reversible: true
+          choc_v2_support: false
+          outer_pad_width_front: 2.6
+          outer_pad_width_back: 2.6
+          show_corner_marks: true
+          show_keycaps: true
+          keycaps_x: kcw
+          keycaps_y: kch
+        adjust:
+          rotate: switch_rotation
+
+      key_switches_1u_inner:
+        what: *fp_key_switch
+        where: [/^main_inner.*$/]
+        params:
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+          side: "F"
+          hotswap: true
+          solder: false
+          reversible: true
+          choc_v2_support: false
+          outer_pad_width_front: 2.6
+          outer_pad_width_back: 1.9
+          show_corner_marks: true
+          show_keycaps: true
+          keycaps_x: kcw
+          keycaps_y: kch
+        adjust:
+          rotate: switch_rotation
+
+      key_switches:
+        what: *fp_key_switch
+        where: [/^(main_outer|thumb).*$/]
+        params:
+          side: 'F'
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+          hotswap: true
+          solder: false
+          reversible: true
+          choc_v2_support: false
+          outer_pad_width_front: 2.6
+          outer_pad_width_back: 2.6
+          show_corner_marks: true
+          show_keycaps: true
+          keycaps_x: 1.25kch
+          keycaps_y: kcw
+        adjust:
+          rotate: switch_rotation
+
+      mcu:
+        what: *fp_mcu
+        where: mcu_center
+        adjust:
+          shift: [0, 0.07]
+        params:
+          via_size: 0.8
+          via_drill: 0.4
+          only_required_jumpers: true
+          use_rectangular_jumpers: false
+          include_extra_pins: false
+          include_traces: true
+          
+          designator: 'MCU'
+          side: 'F'
+          reversible: true
+          reverse_mount: true
+          show_silk_labels: false
+          show_silk_labels_on_both_sides: false
+          show_via_labels: false
+          show_instructions: false
+          P0: DAT
+          P1: LED
+          P21: C0
+          P20: C1
+          P19: C2
+          P18: C3
+          P15: C4
+          P14: C5
+          P2: SDA
+          P3: SCL
+          P4: CS
+          P5: R0
+          P6: R1
+          P7: R2
+          P8: R3
+
+      key_diodes_front:
+        what: *fp_diode
+        where: [key]
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+          side: 'F'
+          reversible: false
+          include_tht: false
+        adjust:
+          shift: [8.275, 0.2]
+          rotate: -90
+
+      key_diodes_back:
+        what: *fp_diode
+        where: [key]
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+          side: 'B'
+          reversible: false
+          include_tht: false
+        adjust:
+          shift: [-8.275, 0.2]
+          rotate: -90
+
+      display_header_niceview:
+        what: *fp_display_niceview
+        where: display_connector
+        adjust:
+          shift: [0, 16.710]
+        params:
+          reversible: true
+          include_traces: true
+          include_labels: false
+
+      display_header_oled:
+        what: *fp_display_oled
+        where: display_connector
+        adjust:
+          shift: [0, 14.710]
+        params:
+          reversible: true
+          include_traces: true
+          invert_jumpers_position: true
+          include_labels: false
+
+      power_switch:
+        what: *fp_power_switch
+        where: power_switch
+        params:
+          reversible: true
+          include_silkscreen: false
+          include_courtyard: true
+        adjust:
+          rotate: 90
+      
+      battery_connector:
+        what: *fp_battery_connector
+        where: battery_connector
+        params:
+          reversible: true
+          include_courtyard: true
+          include_traces: true
+          BAT_P: 'BAT+'
+        adjust:
+          rotate: 90
