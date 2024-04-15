@@ -11,7 +11,7 @@
   (paper "A4")
   (title_block
     (title "ouleetka")
-    (date "2024-04-13")
+    (date "2024-04-15")
     (rev "0.1")
     (company "nxtk")
   )
@@ -1411,7 +1411,7 @@
 
   (footprint "ceoloide:switch_choc_v1_v2"
     (layer "F.Cu")
-    (at 182.4343702 104.7077726 175)
+    (at 182.7801743 105.10208659999999 175)
     (property "Reference" "S10"
       (at 0 0 175)
       (layer "F.SilkS")
@@ -1544,7 +1544,7 @@
 
   (footprint "ceoloide:switch_choc_v1_v2"
     (layer "F.Cu")
-    (at 183.9160178 87.7724627 175)
+    (at 184.2618219 88.16677669999999 175)
     (property "Reference" "S11"
       (at 0 0 175)
       (layer "F.SilkS")
@@ -1677,7 +1677,7 @@
 
   (footprint "ceoloide:switch_choc_v1_v2"
     (layer "F.Cu")
-    (at 185.3976654 70.83715280000001 175)
+    (at 185.7434695 71.23146679999999 175)
     (property "Reference" "S12"
       (at 0 0 175)
       (layer "F.SilkS")
@@ -2209,7 +2209,7 @@
 
   (footprint "ceoloide:switch_choc_v1_v2"
     (layer "F.Cu")
-    (at 200.1105038 97.7217653 265)
+    (at 200.4563079 98.1160793 265)
     (property "Reference" "S16"
       (at 0 0 265)
       (layer "F.SilkS")
@@ -2342,7 +2342,7 @@
 
   (footprint "ceoloide:switch_choc_v1_v2"
     (layer "F.Cu")
-    (at 201.9625633 76.552628 265)
+    (at 202.3083674 76.94694199999999 265)
     (property "Reference" "S17"
       (at 0 0 265)
       (layer "F.SilkS")
@@ -2608,7 +2608,7 @@
 
   (footprint "ceoloide:switch_choc_v1_v2"
     (layer "F.Cu")
-    (at 94.42342680000002 124.4875186 279)
+    (at 94.5328159 124.46724459999999 279)
     (property "Reference" "S19"
       (at 0 0 279)
       (layer "F.SilkS")
@@ -2741,7 +2741,7 @@
 
   (footprint "ceoloide:switch_choc_v1_v2"
     (layer "F.Cu")
-    (at 112.53771340000002 119.60697799999998 267)
+    (at 112.84108230000001 119.55037009999998 267)
     (property "Reference" "S20"
       (at 0 0 267)
       (layer "F.SilkS")
@@ -2876,7 +2876,7 @@
     
   (footprint "ceoloide:mcu_nice_nano"
     (layer "F.Cu")
-    (at 81 80.18 0)
+    (at 81.25 78.93 0)
     (property "Reference" "MCU1"
       (at 0 -15 0)
       (layer "F.SilkS")
@@ -3261,85 +3261,85 @@
 
   
   
-  (segment (start 85.775 67.48) (end 84.4 67.48) (width 0.25) (layer "F.Cu"))
-  (segment (start 76.225 67.48) (end 77.6 67.48) (width 0.25) (layer "F.Cu"))
+  (segment (start 86.025 66.23) (end 84.65 66.23) (width 0.25) (layer "F.Cu"))
+  (segment (start 76.475 66.23) (end 77.85 66.23) (width 0.25) (layer "F.Cu"))
 
-  (segment (start 73.38 67.48) (end 75.5 67.48) (width 0.25) (layer "F.Cu"))
-  (segment (start 73.38 67.48) (end 75.5 67.48) (width 0.25) (layer "B.Cu"))
-  (segment (start 86.5 67.48) (end 88.62 67.48) (width 0.25) (layer "F.Cu"))
-  (segment (start 88.62 67.48) (end 86.5 67.48) (width 0.25) (layer "B.Cu"))
+  (segment (start 73.63 66.23) (end 75.75 66.23) (width 0.25) (layer "F.Cu"))
+  (segment (start 73.63 66.23) (end 75.75 66.23) (width 0.25) (layer "B.Cu"))
+  (segment (start 86.75 66.23) (end 88.87 66.23) (width 0.25) (layer "F.Cu"))
+  (segment (start 88.87 66.23) (end 86.75 66.23) (width 0.25) (layer "B.Cu"))
 
-  (segment (start 78.395305 67.71000000000001) (end 84.17 67.71000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 76.225 67.48) (end 76.574695 67.48) (width 0.25) (layer "B.Cu"))
-  (segment (start 77.299695 68.20500000000001) (end 77.900305 68.20500000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 76.574695 67.48) (end 77.299695 68.20500000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 77.900305 68.20500000000001) (end 78.395305 67.71000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 78.645305 66.46000000000001) (end 84.42 66.46000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 76.475 66.23) (end 76.824695 66.23) (width 0.25) (layer "B.Cu"))
+  (segment (start 77.549695 66.95500000000001) (end 78.150305 66.95500000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 76.824695 66.23) (end 77.549695 66.95500000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 78.150305 66.95500000000001) (end 78.645305 66.46000000000001) (width 0.25) (layer "B.Cu"))
 
-  (segment (start 85.775 67.48) (end 85.425305 67.48) (width 0.25) (layer "B.Cu"))
-  (segment (start 83.594695 67.26) (end 77.82 67.26) (width 0.25) (layer "B.Cu"))
-  (segment (start 85.425305 67.48) (end 84.700305 66.75500000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 84.700305 66.75500000000001) (end 84.099695 66.75500000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 84.099695 66.75500000000001) (end 83.594695 67.26) (width 0.25) (layer "B.Cu"))
+  (segment (start 86.025 66.23) (end 85.675305 66.23) (width 0.25) (layer "B.Cu"))
+  (segment (start 83.844695 66.01) (end 78.07 66.01) (width 0.25) (layer "B.Cu"))
+  (segment (start 85.675305 66.23) (end 84.950305 65.50500000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 84.950305 65.50500000000001) (end 84.349695 65.50500000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 84.349695 65.50500000000001) (end 83.844695 66.01) (width 0.25) (layer "B.Cu"))
         
-  (segment (start 85.775 70.02000000000001) (end 84.4 70.02000000000001) (width 0.25) (layer "F.Cu"))
-  (segment (start 76.225 70.02000000000001) (end 77.6 70.02000000000001) (width 0.25) (layer "F.Cu"))
+  (segment (start 86.025 68.77000000000001) (end 84.65 68.77000000000001) (width 0.25) (layer "F.Cu"))
+  (segment (start 76.475 68.77000000000001) (end 77.85 68.77000000000001) (width 0.25) (layer "F.Cu"))
 
-  (segment (start 73.38 70.02000000000001) (end 75.5 70.02000000000001) (width 0.25) (layer "F.Cu"))
-  (segment (start 73.38 70.02000000000001) (end 75.5 70.02000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 86.5 70.02000000000001) (end 88.62 70.02000000000001) (width 0.25) (layer "F.Cu"))
-  (segment (start 88.62 70.02000000000001) (end 86.5 70.02000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 73.63 68.77000000000001) (end 75.75 68.77000000000001) (width 0.25) (layer "F.Cu"))
+  (segment (start 73.63 68.77000000000001) (end 75.75 68.77000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 86.75 68.77000000000001) (end 88.87 68.77000000000001) (width 0.25) (layer "F.Cu"))
+  (segment (start 88.87 68.77000000000001) (end 86.75 68.77000000000001) (width 0.25) (layer "B.Cu"))
 
-  (segment (start 78.395305 70.25) (end 84.17 70.25) (width 0.25) (layer "B.Cu"))
-  (segment (start 76.225 70.02000000000001) (end 76.574695 70.02000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 77.299695 70.745) (end 77.900305 70.745) (width 0.25) (layer "B.Cu"))
-  (segment (start 76.574695 70.02000000000001) (end 77.299695 70.745) (width 0.25) (layer "B.Cu"))
-  (segment (start 77.900305 70.745) (end 78.395305 70.25) (width 0.25) (layer "B.Cu"))
+  (segment (start 78.645305 69) (end 84.42 69) (width 0.25) (layer "B.Cu"))
+  (segment (start 76.475 68.77000000000001) (end 76.824695 68.77000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 77.549695 69.495) (end 78.150305 69.495) (width 0.25) (layer "B.Cu"))
+  (segment (start 76.824695 68.77000000000001) (end 77.549695 69.495) (width 0.25) (layer "B.Cu"))
+  (segment (start 78.150305 69.495) (end 78.645305 69) (width 0.25) (layer "B.Cu"))
 
-  (segment (start 85.775 70.02000000000001) (end 85.425305 70.02000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 83.594695 69.80000000000001) (end 77.82 69.80000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 85.425305 70.02000000000001) (end 84.700305 69.295) (width 0.25) (layer "B.Cu"))
-  (segment (start 84.700305 69.295) (end 84.099695 69.295) (width 0.25) (layer "B.Cu"))
-  (segment (start 84.099695 69.295) (end 83.594695 69.80000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 86.025 68.77000000000001) (end 85.675305 68.77000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 83.844695 68.55000000000001) (end 78.07 68.55000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 85.675305 68.77000000000001) (end 84.950305 68.045) (width 0.25) (layer "B.Cu"))
+  (segment (start 84.950305 68.045) (end 84.349695 68.045) (width 0.25) (layer "B.Cu"))
+  (segment (start 84.349695 68.045) (end 83.844695 68.55000000000001) (width 0.25) (layer "B.Cu"))
         
-  (segment (start 85.775 72.56) (end 84.4 72.56) (width 0.25) (layer "F.Cu"))
-  (segment (start 76.225 72.56) (end 77.6 72.56) (width 0.25) (layer "F.Cu"))
+  (segment (start 86.025 71.31) (end 84.65 71.31) (width 0.25) (layer "F.Cu"))
+  (segment (start 76.475 71.31) (end 77.85 71.31) (width 0.25) (layer "F.Cu"))
 
-  (segment (start 73.38 72.56) (end 75.5 72.56) (width 0.25) (layer "F.Cu"))
-  (segment (start 73.38 72.56) (end 75.5 72.56) (width 0.25) (layer "B.Cu"))
-  (segment (start 86.5 72.56) (end 88.62 72.56) (width 0.25) (layer "F.Cu"))
-  (segment (start 88.62 72.56) (end 86.5 72.56) (width 0.25) (layer "B.Cu"))
+  (segment (start 73.63 71.31) (end 75.75 71.31) (width 0.25) (layer "F.Cu"))
+  (segment (start 73.63 71.31) (end 75.75 71.31) (width 0.25) (layer "B.Cu"))
+  (segment (start 86.75 71.31) (end 88.87 71.31) (width 0.25) (layer "F.Cu"))
+  (segment (start 88.87 71.31) (end 86.75 71.31) (width 0.25) (layer "B.Cu"))
 
-  (segment (start 78.395305 72.79) (end 84.17 72.79) (width 0.25) (layer "B.Cu"))
-  (segment (start 76.225 72.56) (end 76.574695 72.56) (width 0.25) (layer "B.Cu"))
-  (segment (start 77.299695 73.28500000000001) (end 77.900305 73.28500000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 76.574695 72.56) (end 77.299695 73.28500000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 77.900305 73.28500000000001) (end 78.395305 72.79) (width 0.25) (layer "B.Cu"))
+  (segment (start 78.645305 71.54) (end 84.42 71.54) (width 0.25) (layer "B.Cu"))
+  (segment (start 76.475 71.31) (end 76.824695 71.31) (width 0.25) (layer "B.Cu"))
+  (segment (start 77.549695 72.03500000000001) (end 78.150305 72.03500000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 76.824695 71.31) (end 77.549695 72.03500000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 78.150305 72.03500000000001) (end 78.645305 71.54) (width 0.25) (layer "B.Cu"))
 
-  (segment (start 85.775 72.56) (end 85.425305 72.56) (width 0.25) (layer "B.Cu"))
-  (segment (start 83.594695 72.34) (end 77.82 72.34) (width 0.25) (layer "B.Cu"))
-  (segment (start 85.425305 72.56) (end 84.700305 71.83500000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 84.700305 71.83500000000001) (end 84.099695 71.83500000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 84.099695 71.83500000000001) (end 83.594695 72.34) (width 0.25) (layer "B.Cu"))
+  (segment (start 86.025 71.31) (end 85.675305 71.31) (width 0.25) (layer "B.Cu"))
+  (segment (start 83.844695 71.09) (end 78.07 71.09) (width 0.25) (layer "B.Cu"))
+  (segment (start 85.675305 71.31) (end 84.950305 70.58500000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 84.950305 70.58500000000001) (end 84.349695 70.58500000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 84.349695 70.58500000000001) (end 83.844695 71.09) (width 0.25) (layer "B.Cu"))
         
-  (segment (start 85.775 75.10000000000001) (end 84.4 75.10000000000001) (width 0.25) (layer "F.Cu"))
-  (segment (start 76.225 75.10000000000001) (end 77.6 75.10000000000001) (width 0.25) (layer "F.Cu"))
+  (segment (start 86.025 73.85000000000001) (end 84.65 73.85000000000001) (width 0.25) (layer "F.Cu"))
+  (segment (start 76.475 73.85000000000001) (end 77.85 73.85000000000001) (width 0.25) (layer "F.Cu"))
 
-  (segment (start 73.38 75.10000000000001) (end 75.5 75.10000000000001) (width 0.25) (layer "F.Cu"))
-  (segment (start 73.38 75.10000000000001) (end 75.5 75.10000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 86.5 75.10000000000001) (end 88.62 75.10000000000001) (width 0.25) (layer "F.Cu"))
-  (segment (start 88.62 75.10000000000001) (end 86.5 75.10000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 73.63 73.85000000000001) (end 75.75 73.85000000000001) (width 0.25) (layer "F.Cu"))
+  (segment (start 73.63 73.85000000000001) (end 75.75 73.85000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 86.75 73.85000000000001) (end 88.87 73.85000000000001) (width 0.25) (layer "F.Cu"))
+  (segment (start 88.87 73.85000000000001) (end 86.75 73.85000000000001) (width 0.25) (layer "B.Cu"))
 
-  (segment (start 78.395305 75.33000000000001) (end 84.17 75.33000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 76.225 75.10000000000001) (end 76.574695 75.10000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 77.299695 75.825) (end 77.900305 75.825) (width 0.25) (layer "B.Cu"))
-  (segment (start 76.574695 75.10000000000001) (end 77.299695 75.825) (width 0.25) (layer "B.Cu"))
-  (segment (start 77.900305 75.825) (end 78.395305 75.33000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 78.645305 74.08000000000001) (end 84.42 74.08000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 76.475 73.85000000000001) (end 76.824695 73.85000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 77.549695 74.575) (end 78.150305 74.575) (width 0.25) (layer "B.Cu"))
+  (segment (start 76.824695 73.85000000000001) (end 77.549695 74.575) (width 0.25) (layer "B.Cu"))
+  (segment (start 78.150305 74.575) (end 78.645305 74.08000000000001) (width 0.25) (layer "B.Cu"))
 
-  (segment (start 85.775 75.10000000000001) (end 85.425305 75.10000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 83.594695 74.88000000000001) (end 77.82 74.88000000000001) (width 0.25) (layer "B.Cu"))
-  (segment (start 85.425305 75.10000000000001) (end 84.700305 74.375) (width 0.25) (layer "B.Cu"))
-  (segment (start 84.700305 74.375) (end 84.099695 74.375) (width 0.25) (layer "B.Cu"))
-  (segment (start 84.099695 74.375) (end 83.594695 74.88000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 86.025 73.85000000000001) (end 85.675305 73.85000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 83.844695 73.63000000000001) (end 78.07 73.63000000000001) (width 0.25) (layer "B.Cu"))
+  (segment (start 85.675305 73.85000000000001) (end 84.950305 73.125) (width 0.25) (layer "B.Cu"))
+  (segment (start 84.950305 73.125) (end 84.349695 73.125) (width 0.25) (layer "B.Cu"))
+  (segment (start 84.349695 73.125) (end 83.844695 73.63000000000001) (width 0.25) (layer "B.Cu"))
         
     
 
@@ -3621,7 +3621,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "F.Cu")
-        (at 182.2265038 107.083697 -5)
+        (at 182.5723079 107.478011 -5)
         (property "Reference" "D13"
             (at 0 0 -5)
             (layer "F.SilkS")
@@ -3644,7 +3644,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "F.Cu")
-        (at 183.7081514 90.14838710000001 -5)
+        (at 184.0539555 90.54270109999999 -5)
         (property "Reference" "D14"
             (at 0 0 -5)
             (layer "F.SilkS")
@@ -3667,7 +3667,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "F.Cu")
-        (at 185.189799 73.21307720000001 -5)
+        (at 185.5356031 73.6073912 -5)
         (property "Reference" "D15"
             (at 0 0 -5)
             (layer "F.SilkS")
@@ -3690,7 +3690,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "F.Cu")
-        (at 202.4864282 97.9296317 85)
+        (at 202.83223230000002 98.3239457 85)
         (property "Reference" "D16"
             (at 0 0 85)
             (layer "F.SilkS")
@@ -3713,7 +3713,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "F.Cu")
-        (at 204.3384877 76.7604944 85)
+        (at 204.6842918 77.1548084 85)
         (property "Reference" "D17"
             (at 0 0 85)
             (layer "F.SilkS")
@@ -3759,7 +3759,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "F.Cu")
-        (at 96.77906350000002 124.1144224 99)
+        (at 96.88845260000001 124.09414839999998 99)
         (property "Reference" "D19"
             (at 0 0 99)
             (layer "F.SilkS")
@@ -3782,7 +3782,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "F.Cu")
-        (at 114.91944480000002 119.73179929999998 87)
+        (at 115.22281370000002 119.67519139999997 87)
         (property "Reference" "D20"
             (at 0 0 87)
             (layer "F.SilkS")
@@ -4081,7 +4081,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "B.Cu")
-        (at 182.2265038 107.083697 175)
+        (at 182.5723079 107.478011 175)
         (property "Reference" "D33"
             (at 0 0 175)
             (layer "B.SilkS")
@@ -4104,7 +4104,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "B.Cu")
-        (at 183.7081514 90.14838710000001 175)
+        (at 184.0539555 90.54270109999999 175)
         (property "Reference" "D34"
             (at 0 0 175)
             (layer "B.SilkS")
@@ -4127,7 +4127,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "B.Cu")
-        (at 185.189799 73.21307720000001 175)
+        (at 185.5356031 73.6073912 175)
         (property "Reference" "D35"
             (at 0 0 175)
             (layer "B.SilkS")
@@ -4150,7 +4150,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "B.Cu")
-        (at 202.4864282 97.9296317 265)
+        (at 202.83223230000002 98.3239457 265)
         (property "Reference" "D36"
             (at 0 0 265)
             (layer "B.SilkS")
@@ -4173,7 +4173,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "B.Cu")
-        (at 204.3384877 76.7604944 265)
+        (at 204.6842918 77.1548084 265)
         (property "Reference" "D37"
             (at 0 0 265)
             (layer "B.SilkS")
@@ -4219,7 +4219,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "B.Cu")
-        (at 96.77906350000002 124.1144224 279)
+        (at 96.88845260000001 124.09414839999998 279)
         (property "Reference" "D39"
             (at 0 0 279)
             (layer "B.SilkS")
@@ -4242,7 +4242,7 @@
 
     (footprint "ceoloide:diode_tht_sod123"
         (layer "B.Cu")
-        (at 114.91944480000002 119.73179929999998 267)
+        (at 115.22281370000002 119.67519139999997 267)
         (property "Reference" "D40"
             (at 0 0 267)
             (layer "B.SilkS")
@@ -4265,7 +4265,7 @@
 
   (footprint "ceoloide:display_nice_view"
     (layer F.Cu)
-    (at 81 81.84 0)
+    (at 81.25 80.09 0)
     (property "Reference" "DISP1"
       (at 0 20 0)
       (layer "F.SilkS")
@@ -4331,19 +4331,19 @@
     (fp_line (start 7 18) (end 7 -18) (layer Dwgs.User) (stroke (width 0.15) (type solid)))
   )
     
-  (segment (start 75.92 98.54) (end 75.92 96.79) (width 0.25) (layer "F.Cu") (net 37))
-  (segment (start 78.46 98.54) (end 78.46 96.79) (width 0.25) (layer "F.Cu") (net 28))
-  (segment (start 83.54 98.54) (end 83.54 96.79) (width 0.25) (layer "F.Cu") (net 71))
-  (segment (start 86.08 98.54) (end 86.08 96.79) (width 0.25) (layer "F.Cu") (net 70))
-  (segment (start 75.92 98.54) (end 75.92 96.79) (width 0.25) (layer "B.Cu") (net 37))
-  (segment (start 78.46 98.54) (end 78.46 96.79) (width 0.25) (layer "B.Cu") (net 28))
-  (segment (start 83.54 98.54) (end 83.54 96.79) (width 0.25) (layer "B.Cu") (net 71))
-  (segment (start 86.08 98.54) (end 86.08 96.79) (width 0.25) (layer "B.Cu") (net 70))
+  (segment (start 76.17 96.79) (end 76.17 95.04) (width 0.25) (layer "F.Cu") (net 37))
+  (segment (start 78.71 96.79) (end 78.71 95.04) (width 0.25) (layer "F.Cu") (net 28))
+  (segment (start 83.79 96.79) (end 83.79 95.04) (width 0.25) (layer "F.Cu") (net 71))
+  (segment (start 86.33 96.79) (end 86.33 95.04) (width 0.25) (layer "F.Cu") (net 70))
+  (segment (start 76.17 96.79) (end 76.17 95.04) (width 0.25) (layer "B.Cu") (net 37))
+  (segment (start 78.71 96.79) (end 78.71 95.04) (width 0.25) (layer "B.Cu") (net 28))
+  (segment (start 83.79 96.79) (end 83.79 95.04) (width 0.25) (layer "B.Cu") (net 71))
+  (segment (start 86.33 96.79) (end 86.33 95.04) (width 0.25) (layer "B.Cu") (net 70))
     
 
   (footprint "ceoloide:display_ssd1306"
     (layer "F.Cu")
-    (at 81 83.84 0)
+    (at 81.25 82.09 0)
     (property "Reference" "DISP2"
       (at 0 20 0)
       (layer "F.SilkS")
@@ -4415,19 +4415,19 @@
     (fp_line (start -6.00 12.55) (end 6.00 12.55) (layer "Dwgs.User") (stroke (width 0.15) (type solid)))
   )
     
-  (segment (start 77.19 100.54) (end 77.19 102.29) (width 0.25) (layer "F.Cu") (net 28))
-  (segment (start 79.73 100.54) (end 79.73 102.29) (width 0.25) (layer "F.Cu") (net 30))
-  (segment (start 82.27 100.54) (end 82.27 102.29) (width 0.25) (layer "F.Cu") (net 36))
-  (segment (start 84.81 100.54) (end 84.81 102.29) (width 0.25) (layer "F.Cu") (net 35))
-  (segment (start 77.19 100.54) (end 77.19 102.29) (width 0.25) (layer "B.Cu") (net 28))
-  (segment (start 79.73 100.54) (end 79.73 102.29) (width 0.25) (layer "B.Cu") (net 30))
-  (segment (start 82.27 100.54) (end 82.27 102.29) (width 0.25) (layer "B.Cu") (net 36))
-  (segment (start 84.81 100.54) (end 84.81 102.29) (width 0.25) (layer "B.Cu") (net 35))
+  (segment (start 77.44 98.79) (end 77.44 100.54) (width 0.25) (layer "F.Cu") (net 28))
+  (segment (start 79.98 98.79) (end 79.98 100.54) (width 0.25) (layer "F.Cu") (net 30))
+  (segment (start 82.52 98.79) (end 82.52 100.54) (width 0.25) (layer "F.Cu") (net 36))
+  (segment (start 85.06 98.79) (end 85.06 100.54) (width 0.25) (layer "F.Cu") (net 35))
+  (segment (start 77.44 98.79) (end 77.44 100.54) (width 0.25) (layer "B.Cu") (net 28))
+  (segment (start 79.98 98.79) (end 79.98 100.54) (width 0.25) (layer "B.Cu") (net 30))
+  (segment (start 82.52 98.79) (end 82.52 100.54) (width 0.25) (layer "B.Cu") (net 36))
+  (segment (start 85.06 98.79) (end 85.06 100.54) (width 0.25) (layer "B.Cu") (net 35))
     
 
   (footprint "ceoloide:power_switch_smd_side"
     (layer "F.Cu")
-    (at 77.5 63.25 90)
+    (at 77.75 62 90)
     (property "Reference" "PWR1"
       (at -3.6 0 0)
       (layer "F.SilkS")
@@ -4497,7 +4497,7 @@
 
   (footprint "ceoloide:reset_button_smd_side"
     (layer "F.Cu")
-    (at 87 62.905 0)
+    (at 87.25 61.655 0)
     (property "Reference" "RST1"
       (at 0 0 0)
       (layer "F.SilkS")
@@ -4550,7 +4550,7 @@
 
     (footprint "ceoloide:battery_connector_jst_ph_2"
         (layer "F.Cu")
-        (at 78 107.45 90)
+        (at 78.25 106.2 90)
         (property "Reference" "JST1"
             (at 0 4.8 90)
             (layer "F.SilkS")
@@ -4755,16 +4755,16 @@
         
     )
          
-    (segment (start 79.8 108.45) (end 78 108.45) (width 0.25) (layer "F.Cu") (net 82))
-    (segment (start 79.8 108.45) (end 78 108.45) (width 0.25) (layer "B.Cu") (net 82))
-    (segment (start 79.8 106.45) (end 78 106.45) (width 0.25) (layer "F.Cu") (net 83))
-    (segment (start 79.8 106.45) (end 78 106.45) (width 0.25) (layer "B.Cu") (net 83))
+    (segment (start 80.05 107.2) (end 78.25 107.2) (width 0.25) (layer "F.Cu") (net 82))
+    (segment (start 80.05 107.2) (end 78.25 107.2) (width 0.25) (layer "B.Cu") (net 82))
+    (segment (start 80.05 105.2) (end 78.25 105.2) (width 0.25) (layer "F.Cu") (net 83))
+    (segment (start 80.05 105.2) (end 78.25 105.2) (width 0.25) (layer "B.Cu") (net 83))
         
-  (gr_line (start 151.91122710000002 114.24999999999994) (end 205.86618680000004 114.24999999999994) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
-(gr_arc (start 205.8661868217685 114.25) (mid 207.2173672217685 113.7245546) (end 207.85857622176852 112.4243114) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
-(gr_line (start 211.79147319999998 67.47109419999998) (end 207.8586037217685 112.4239964) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
-(gr_arc (start 211.7915123 67.47064859999998) (mid 211.5409306 66.31343019999998) (end 210.67986889999997 65.50070739999998) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
-(gr_arc (start 210.6798689 65.50070739999998) (mid 151.8936812 49.54129090000001) (end 91.3943218 56.63680819999999) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+  (gr_line (start 151.91122710000002 114.24999999999994) (end 206.24648890000003 114.24999999999994) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_arc (start 206.24648892363612 114.25) (mid 207.59766932363613 113.7245546) (end 208.23887832363613 112.4243114) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_line (start 212.15606939999998 67.65061119999999) (end 208.23890582363612 112.4239964) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_arc (start 212.1561174 67.65006549999998) (mid 211.90679419999998 66.49508069999999) (end 211.0490747 65.68238819999999) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
+(gr_arc (start 211.0490747 65.68238819999999) (mid 152.0988488 49.55666879999998) (end 91.3943218 56.63680819999999) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
 (gr_arc (start 91.39397389999999 56.63691879999999) (mid 90.38578869999999 57.36207759999999) (end 90.0000001 58.54252649999999) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
 (gr_line (start 90 60) (end 90 58.5428916) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
 (gr_arc (start 89 61) (mid 89.7071068 60.7071068) (end 90 60) (layer Edge.Cuts) (stroke (width 0.15) (type default)))
