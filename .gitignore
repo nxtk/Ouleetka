@@ -21,12 +21,14 @@ freerouting/freerouting.log
 *.sch-bak
 *~
 _autosave-*
+~_autosave-*
 *.tmp
 *-save.pro
 *-save.kicad_pcb
 fp-info-cache
 *.pro
 logs
+*.lock
 
 # Netlist files (exported from Eeschema)
 *.net
