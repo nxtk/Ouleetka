@@ -18,6 +18,7 @@ meta:
     display_oled: &fp_display_oled "ceoloide/display_ssd1306"
     battery_connector: &fp_battery_connector "ceoloide/battery_connector_jst_ph_2"
     diode: &fp_diode "ceoloide/diode_tht_sod123"
+    led: &fp_led "ceoloide/led_sk6812mini-e"
 
 units:
   $default_autobind: 0
@@ -106,24 +107,44 @@ points.zones:
       padding: ky
       origin: [-0.5kx, -0.5ky]
     columns:
-      inner.key.column_net: C5
+      inner:
+        key:
+          column_net: C5
+        rows:
+          home.tags:
+            led: true
       index.key.column_net: C4
-      middle.key:
-        column_net: C3
-        spread: 0.5kx + 0.5kx125
-        stagger: 7.425
-      ring.key:
-        column_net: C2
-        spread: kx125 - 0.25
-        stagger: -1.65
-        splay: -2.5
-      pinky.key:
-        column_net: C1
-        spread: kx + 3.5
-        stagger: -7.25
-        splay: -2.5
+      middle:
+        key:
+          tags:
+            key125: true
+          column_net: C3
+          spread: 0.5kx + 0.5kx125 + 2
+          stagger: 7.425
+        rows:
+          home.tags:
+            led: true
+      ring:
+        key:
+          tags:
+            key125: true
+          column_net: C2
+          spread: kx125 + 0.75 #- 0.25
+          stagger: -1.65
+          splay: -2.5
+      pinky:
+        key:
+          column_net: C1
+          spread: kx + 3.5
+          stagger: -7.25
+          splay: -2.5
+        rows:
+          home.tags:
+            led: true
       outer:
         key:
+          tags:
+            key125: true
           column_net: C0
           stagger: 6
           spread: kx
@@ -143,24 +164,34 @@ points.zones:
       shift: [-1.175kx, -1.8ky + 0.4]
       rotate: 16
     key:
-      tags: [key]
+      tags: 
+        key: true
       padding: kx
       origin: [-0.5kx, -0.5ky]
       rotate: 90
     columns:
-      outer.key:
-        column_net: C5
-      middle.key:
-        column_net: C4
-        stagger: 4
-        splay: -7
-        spread: ky + -0.2
-      inner.key:
-        column_net: C3
-        stagger: 5.5
-        splay: -13
-        shift: [-0.85, -1]
-        spread: ky + 0.5
+      outer:
+        key:
+          tags:
+            led: true
+            key125: true
+          column_net: C5
+      middle:
+        key:
+          tags:
+            led: true
+            key125: true
+          column_net: C4
+          stagger: 4
+          splay: -7
+          spread: ky + -0.2
+      inner:
+        key:
+          column_net: C3
+          stagger: 5.5
+          splay: -13
+          shift: [-0.85, -1]
+          spread: ky + 0.5
     rows:
       default.row_net: R3
 
@@ -182,7 +213,7 @@ points.zones:
     key.tags: [helper]
     anchor:
       ref: main_inner_top
-      shift: [-18.2, -9]
+      shift: [-18.2, -13]
 
   mcu_top_right:
     key.tags: [helper]
@@ -225,13 +256,14 @@ points.zones:
     key.tags: [helper]
     anchor:
       ref: mcu_bottom_center
-      shift: [0, -2.6/2 - 1.25]
+      shift: [0, -2.6/2 - 1.75]
 
   battery_connector:
     key.tags: [helper]
     anchor:
       ref: mcu_center
-      shift: [-7.5, -27.75]
+      shift: [3, -27.75]
+      rotate: 180
 
   # buttons
   power_switch:
@@ -244,7 +276,7 @@ points.zones:
     key.tags: [helper]
     anchor:
       ref: battery_connector
-      shift: [2.75, -5.25]
+      shift: [4.75, 5.25]
 
   # screws
   standoff_right:
@@ -265,7 +297,7 @@ points.zones:
     key.tags: [helper, standoff]
     anchor:
       ref: main_pinky_home
-      shift: [9.237, 1.373]
+      shift: [9.237, -0.125]
 
   screw_inner_top:
     key.tags: [helper, screw]
@@ -277,38 +309,37 @@ points.zones:
     key.tags: [helper, screw]
     anchor:
       ref: main_inner_bottom
-      shift: [7, -30]
+      shift: [7, -27.5]
 
   screw_middle_top:
     key.tags: [helper, screw]
     anchor:
       ref: main_middle_top
-      shift: [12, 4]
+      shift: [12, 2.5]
 
   screw_middle_bottom:
     key.tags: [helper, screw]
     anchor:
       ref: main_middle_bottom
-      shift: [12, -17.6]
+      shift: [12, -15.350]
 
-  screw_left_top:
+  screw_right_top:
     key.tags: [helper, screw]
     anchor:
-      ref: main_pinky_top
-      shift: [9.2, 4.35]
+      ref: main_middle_home
+      shift: [66.741, 7.425]
 
-  screw_left_middle:
+  screw_mcu_middle:
     key.tags: [helper, screw]
     anchor:
-      ref: standoff_left
-      shift: [11.5, 0]
-      rotate: 5
+      ref: main_inner_home
+      shift: [-25.700, -18.875]
 
-  screw_left_bottom:
+  screw_right_bottom:
     key.tags: [helper, screw]
     anchor:
       ref: main_middle_bottom
-      shift: [51.750, -13.710]
+      shift: [63.254, -15.350]
 
 outlines:
   _viewport_fix:
@@ -500,7 +531,7 @@ outlines:
       operation: subtract
       size: [50, 70]
       adjust:
-        shift: [-0.5kx - 50/2 + 0.7, 0]
+        shift: [-0.5kx - 50/2 + 0.25, 0]
     - what: rectangle
       where: main_outer_home
       operation: subtract
@@ -523,9 +554,9 @@ outlines:
   _mcu_addon_raw:
     - what: rectangle
       where: main_inner_home
-      size: [24, 65]
+      size: [24, 64]
       adjust:
-        shift: [-0.5kx - 22.9 / 2 + 0.5, -7.575]
+        shift: [-0.5kx - 22.9 / 2 + 1, -10]
     - what: rectangle
       where: thumb_outer
       operation: subtract
@@ -538,7 +569,7 @@ outlines:
       where: main_middle_home
       radius: 140
       adjust:
-        shift: [-86, 71.15]
+        shift: [-87.5, 71.25]
       operation: stack
     - what: rectangle
       where: main_inner_home
@@ -573,21 +604,21 @@ outlines:
       radius: 57
       operation: subtract
       adjust:
-        shift: [21, -76.5]
+        shift: [19.5, -76.5]
     - what: rectangle
       where: main_middle_bottom
       operation: subtract
       size: [50, 20]
       adjust:
         shift: [47, -30]
-        rotate: -1.2
+        rotate: -1
     - what: rectangle
       where: main_middle_bottom
       operation: subtract
       size: [10, 5]
       adjust:
-        shift: [-14.7, -35]
-        rotate: 32.5
+        shift: [-13, -33.1]
+        rotate: 32
 
   _top_plate0:
     - what: outline
@@ -613,15 +644,15 @@ outlines:
     - what: rectangle
       where: main_inner_home
       operation: add
-      size: [10, 30]
+      size: [10, 35]
       adjust:
-        shift: [-32.1, 10]
+        shift: [-32.05, 15]
 
   _pcb_raw:
     - _top_plate_raw
     - _mcu_addon_raw
-    #- _thumb_addon_raw
     - -_curve_left_side
+
 
   _pcb0:
     - what: outline
@@ -632,6 +663,7 @@ outlines:
     - what: outline
       name: _pcb0
       expand: 0.5
+      fillet: 0.5
 
   pcb:
     - ^_viewport_fix
@@ -644,15 +676,11 @@ outlines:
     - ^_grid
     - ^stuff
     - ^_pcb_raw
-    #- ^_mcu_addon_raw
-    # - ^_thumb_addon_raw
-    # - ^_top_plate_raw
 
   preview:
     - ^_viewport_fix
     - ^stuff
     - ^pcb
-    #- ^top_plate
 
 pcbs:
   ouleetka:
@@ -672,17 +700,19 @@ pcbs:
         what: *fp_key_switch
         where: false
         params: &key_switch_base_params
-          from: "{{col.name}}"
-          to: "{{row}}"
+          from: "{{column_net}}"
+          to: "{{row_net}}S"
+          LEFTSTAB: "{{row_net}}"
+          RIGHTSTAB: "{{row_net}}S"
           keycap_width: kcx
           keycap_height: kcy
           choc_v1_stabilizers_diameter: 1.75
           reversible: true
           include_plated_holes: true
           include_corner_marks: true
-          include_stabilizer_nets: false
+          include_stabilizer_nets: true
           include_centerhole_net: true
-          #switch_3dmodel_filename: ../../footprints/3dmodels/switch_kailh_choc_v1_purple.step
+          switch_3dmodel_filename: ../../footprints/3dmodels/switch_kailh_choc_v1_purple.step
           switch_3dmodel_xyz_rotation: [0, 0, 0]
           switch_3dmodel_xyz_offset: [0, 0, 0]
           hotswap_3dmodel_filename: ../../footprints/3dmodels/hotswap_kailh_choc_v1.step
@@ -696,7 +726,7 @@ pcbs:
 
       key_switch_1u:
         <<: *key_switch_base
-        where: [/^main_(?!(inner|middle|ring|outer)).*/, thumb_inner]
+        where: [[key, -key125, -/^main_inner/]]
 
       key_switch_1u_inner:
         <<:
@@ -704,7 +734,17 @@ pcbs:
               <<: *key_switch_base_params
               outer_pad_width_back: 2.3
           - *key_switch_base
-        where: [/^main_inner.*/]
+        where: [[/^main_inner/, -/^main_inner_home/]]
+
+      key_switch_1u_inner_led:
+        <<:
+          - params:
+              <<: *key_switch_base_params
+              outer_pad_width_back: 2.3
+              LEFTSTAB: "DOUT"
+              RIGHTSTAB: "DIN"
+          - *key_switch_base
+        where: [main_inner_home]
 
       key_switch_1_25u:
         <<:
@@ -712,7 +752,17 @@ pcbs:
               <<: *key_switch_base_params
               keycap_3dmodel_xyz_scale: [1.225, 1, 1]
           - *key_switch_base
-        where: [/^main_(middle|ring|outer).*/]
+        where: [[key125, -/^thumb/, -led]]
+
+      key_switch_1_25u_led:
+        <<:
+          - params:
+              <<: *key_switch_base_params
+              keycap_3dmodel_xyz_scale: [1.225, 1, 1]
+              LEFTSTAB: "DOUT"
+              RIGHTSTAB: "DIN"
+          - *key_switch_base
+        where: [[key125, led]]
 
       key_switch_125u_thumb:
         <<:
@@ -720,170 +770,186 @@ pcbs:
               <<: *key_switch_base_params
               #keycap_3dmodel_filename: ../../footprints/3dmodels/keycap_mbk_15_black.stpZ
               keycap_3dmodel_xyz_scale: [0.82, 1, 1]
+              LEFTSTAB: "DOUT"
+              RIGHTSTAB: "DIN"
           - *key_switch_base
         where: [thumb_outer, thumb_middle]
 
-      # mcu:
-      #   what: *fp_mcu
-      #   where: mcu_center
-      #   adjust:
-      #     shift: [0, 0.07]
-      #   params:
-      #     via_size: 0.8
-      #     via_drill: 0.4
-      #     only_required_jumpers: true
-      #     use_rectangular_jumpers: false
-      #     include_extra_pins: false
-      #     include_traces: true
-
-      #     designator: "MCU"
-      #     side: "F"
-      #     reversible: true
-      #     reverse_mount: true
-      #     show_silk_labels: false
-      #     show_silk_labels_on_both_sides: false
-      #     show_via_labels: false
-      #     show_instructions: false
-
-      #     #mcu_3dmodel_filename: ../../footprints/3dmodels/pro_micro.stpZ
-      #     mcu_3dmodel_xyz_rotation: [-90, 0, 90]
-      #     mcu_3dmodel_xyz_offset: [-7.6, 12.7, 3.6]
-      #     mcu_3dmodel_xyz_scale: [1, 1, 1]
-
-      #     P0: DAT
-      #     P1: LED
-      #     P21: C0
-      #     P20: C1
-      #     P19: C2
-      #     P18: C3
-      #     P15: C4
-      #     P14: C5
-      #     P2: SDA
-      #     P3: SCL
-      #     P4: CS
-      #     P5: R0
-      #     P6: R1
-      #     P7: R2
-      #     P8: R3
-
-      key_diodes_front:
+      key_diode:
         what: *fp_diode
-        where: [key]
+        where: [[key, -led]]
         params:
-          from: "{{colrow}}"
+          from: "{{row_net}}S"
           to: "{{row_net}}"
           side: "F"
-          reversible: false
+          reversible: true
           include_tht: false
         adjust:
-          shift: [0, -2.385]
-          rotate: 0
-
-      key_diodes_back:
-        what: *fp_diode
-        where: [key]
-        params:
-          from: "{{colrow}}"
-          to: "{{row_net}}"
-          side: "B"
-          reversible: false
-          include_tht: false
-        adjust:
-          shift: [0, -2.385]
+          shift: [0, 5.150]
           rotate: 180
 
-      # display_header_niceview:
-      #   what: *fp_display_niceview
-      #   where: display_header
-      #   adjust:
-      #     shift: [0, 16.710]
-      #   params:
-      #     reversible: true
-      #     include_traces: true
-      #     include_labels: false
-      #     #model_filename: ../../footprints/3dmodels/PinHeader_1x05_P2.54mm_Vertical.step
-      #     model_xyz_rotation: [0, 0, 90]
-      #     model_xyz_offset: [5.1, -16.7, 0.03]
-      #     model_xyz_scale: [1, 1, 1]
+      key_diode_ledkey:
+        what: *fp_diode
+        where: [[key, led]]
+        params:
+          from: "{{row_net}}S"
+          to: "{{row_net}}"
+          side: "F"
+          reversible: true
+          include_tht: false
+        adjust:
+          shift: [3.625, 0.750]
+          rotate: -90
 
-      # display_header_oled:
-      #   what: *fp_display_oled
-      #   where: display_header
-      #   adjust:
-      #     shift: [0, 14.710]
-      #   params:
-      #     reversible: true
-      #     include_traces: true
-      #     invert_jumpers_position: true
-      #     include_labels: false
-      #     #model_filename: ../../footprints/3dmodels/PinHeader_1x04_P2.54mm_Vertical.step
-      #     #model_xyz_rotation: [0, 0, 90]
-      #     #model_xyz_offset: [3.8, -16.7, 0.03]
-      #     #model_xyz_scale: [1, 1, 1]
-      #     #model_filename: ../../footprints/3dmodels/oled.step
-      #     model_xyz_rotation: [0, 0, -90]
-      #     model_xyz_offset: [0, 1, 8.5]
-      #     model_xyz_scale: [1, 1, 1]
+      led:
+        what: *fp_led
+        where: [led]
+        params:
+          reversible: true
+          reverse_mount: false #underglow
+          include_traces_vias: false
+          include_courtyard: true
+          include_keepout: true
+          P2: "DOUT"
+          P4: "DIN"
+        adjust:
+          shift: [0, 5]
 
-#       power_switch:
-#         what: *fp_power_switch
-#         where: power_switch
-#         params:
-#           reversible: true
-#           include_silkscreen: false
-#           include_courtyard: true
-#           switch_3dmodel_filename: ../../footprints/3dmodels/pcm12smtr.step
-#           switch_3dmodel_xyz_rotation: [0.03, 0, -90]
-#           switch_3dmodel_xyz_offset: [0, 0, 0]
-#           switch_3dmodel_xyz_scale: [1, 1.2, 1]
-#         adjust:
-#           rotate: 90
+      mcu:
+        what: *fp_mcu
+        where: mcu_center
+        adjust:
+          shift: [0, 0.07]
+        params:
+          via_size: 0.8
+          via_drill: 0.4
+          only_required_jumpers: true
+          use_rectangular_jumpers: false
+          include_extra_pins: false
+          include_traces: true
 
-#       reset_switch:
-#         what: *fp_reset_switch
-#         where: reset_switch
-#         params:
-#           reversible: true
-#           model_filename: ../../footprints/3dmodels/reset_button.step
-#           model_xyz_rotation: [-90, 0, 0]
-#           model_xyz_offset: [-3.05, -1.8, 0.05]
-#           model_xyz_scale: [1, 1, 1]
-# #        adjust:
-# #          rotate: 90
+          designator: "MCU"
+          side: "F"
+          reversible: true
+          reverse_mount: true
+          show_silk_labels: false
+          show_silk_labels_on_both_sides: false
+          show_via_labels: false
+          show_instructions: false
 
-#       battery_connector:
-#         what: *fp_battery_connector
-#         where: battery_connector
-#         params:
-#           reversible: true
-#           include_courtyard: true
-#           include_traces: true
-#           BAT_P: "BAT+"
-#           model_filename: ../../footprints/3dmodels/battery_connector_JST_PH2.0mm.stpZ
-#           model_xyz_rotation: [0, 0, 0]
-#           model_xyz_offset: [0, 0, 0]
-#           model_xyz_scale: [1, 1, 1]
-#         adjust:
-#           rotate: 90
+          mcu_3dmodel_filename: ../../footprints/3dmodels/pro_micro.stpZ
+          mcu_3dmodel_xyz_rotation: [-90, 0, 90]
+          mcu_3dmodel_xyz_offset: [-7.6, 12.7, 3.6]
+          mcu_3dmodel_xyz_scale: [1, 1, 1]
 
-#       screws:
-#         what: *fp_mounting_hole
-#         where: [screw]
-#         params:
-#           designator: "H"
-#           side: "F"
-#           outline: screw_head_radius - screw_radius
-#           drill: screw_diameter
-#           drill_y: 0
-#           include_courtyard: false
+          P0: DAT
+          P1: LED
+          P21: C0
+          P20: C1
+          P19: C2
+          P18: C3
+          P15: C4
+          P14: C5
+          P2: SDA
+          P3: SCL
+          P4: CS
+          P5: R0
+          P6: R1
+          P7: R2
+          P8: R3
 
-#       standoffs:
-#         what: *fp_mounting_hole
-#         where: [standoff]
-#         params:
-#           designator: "H"
-#           side: "F"
-#           outline: screw_head_radius - standoff_radius
-#           drill: standoff_diameter
-#           drill_y: 0
-#           include_courtyard: false
+      display_header_niceview:
+        what: *fp_display_niceview
+        where: display_header
+        adjust:
+          shift: [0, 16.710]
+        params:
+          reversible: true
+          include_traces: true
+          include_labels: false
+          #model_filename: ../../footprints/3dmodels/PinHeader_1x05_P2.54mm_Vertical.step
+          model_xyz_rotation: [0, 0, 90]
+          model_xyz_offset: [5.1, -16.7, 0.03]
+          model_xyz_scale: [1, 1, 1]
+
+      display_header_oled:
+        what: *fp_display_oled
+        where: display_header
+        adjust:
+          shift: [0, 14.710]
+        params:
+          reversible: true
+          include_traces: true
+          invert_jumpers_position: true
+          include_labels: false
+          #model_filename: ../../footprints/3dmodels/PinHeader_1x04_P2.54mm_Vertical.step
+          #model_xyz_rotation: [0, 0, 90]
+          #model_xyz_offset: [3.8, -16.7, 0.03]
+          #model_xyz_scale: [1, 1, 1]
+          #model_filename: ../../footprints/3dmodels/oled.step
+          model_xyz_rotation: [0, 0, -90]
+          model_xyz_offset: [0, 1, 8.5]
+          model_xyz_scale: [1, 1, 1]
+
+      power_switch:
+        what: *fp_power_switch
+        where: power_switch
+        params:
+          reversible: true
+          include_silkscreen: false
+          include_courtyard: true
+          switch_3dmodel_filename: ../../footprints/3dmodels/pcm12smtr.step
+          switch_3dmodel_xyz_rotation: [0.03, 0, -90]
+          switch_3dmodel_xyz_offset: [0, 0, 0]
+          switch_3dmodel_xyz_scale: [1, 1.2, 1]
+        adjust:
+          rotate: 90
+
+      reset_switch:
+        what: *fp_reset_switch
+        where: reset_switch
+        params:
+          reversible: true
+          model_filename: ../../footprints/3dmodels/reset_button.step
+          model_xyz_rotation: [-90, 0, 0]
+          model_xyz_offset: [-3.05, -1.8, 0.05]
+          model_xyz_scale: [1, 1, 1]
+#        adjust:
+#          rotate: 90
+
+      battery_connector:
+        what: *fp_battery_connector
+        where: battery_connector
+        params:
+          reversible: true
+          include_courtyard: true
+          include_traces: true
+          BAT_P: "BAT+"
+          model_filename: ../../footprints/3dmodels/battery_connector_JST_PH2.0mm.stpZ
+          model_xyz_rotation: [0, 0, 0]
+          model_xyz_offset: [0, 0, 0]
+          model_xyz_scale: [1, 1, 1]
+        adjust:
+          rotate: 90
+
+      screws:
+        what: *fp_mounting_hole
+        where: [screw]
+        params:
+          designator: "H"
+          side: "F"
+          outline: screw_head_radius - screw_radius
+          drill: screw_diameter
+          drill_y: 0
+          include_courtyard: false
+
+      standoffs:
+        what: *fp_mounting_hole
+        where: [standoff]
+        params:
+          designator: "H"
+          side: "F"
+          outline: screw_head_radius - standoff_radius
+          drill: standoff_diameter
+          drill_y: 0
+          include_courtyard: false
