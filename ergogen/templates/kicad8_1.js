@@ -78,8 +78,8 @@ module.exports = {
     (45 "Margin" user)
     (46 "B.CrtYd" user "B.Courtyard")
     (47 "F.CrtYd" user "F.Courtyard")
-    #(48 "B.Fab" user)
-    #(49 "F.Fab" user)
+    (48 "B.Fab" user)
+    (49 "F.Fab" user)
   )
 
   (setup
@@ -134,7 +134,7 @@ module.exports = {
 			)
 			(layer "F.Mask"
 				(type "Top Solder Mask")
-				(color "Purple")
+				(color "Blue")
 				(thickness 0.01)
 			)
 			(layer "F.Cu"
@@ -154,7 +154,7 @@ module.exports = {
 			)
 			(layer "B.Mask"
 				(type "Bottom Solder Mask")
-				(color "Purple")
+				(color "Blue")
 				(thickness 0.01)
 			)
 			(layer "B.Paste"

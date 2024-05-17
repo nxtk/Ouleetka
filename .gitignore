@@ -28,7 +28,6 @@ _autosave-*
 fp-info-cache
 *.pro
 logs
-*.lock
 
 # Netlist files (exported from Eeschema)
 *.net
@@ -62,3 +61,6 @@ ergogen/output/gerbers/*/*
 # datasheets and schematics
 doc/datasheets
 doc/example_schematics
+
+# 3Dmodels
+ergogen/footprints/3dmodels
