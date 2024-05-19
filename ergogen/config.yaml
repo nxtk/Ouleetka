@@ -10,7 +10,7 @@ meta:
     #template: &kicad_template "kicad5"
     template: &kicad_template "kicad8_1"
     key_switch: &fp_key_switch ceoloide/switch_choc_v1_v2
-    reset_switch: &fp_reset_switch "ceoloide/reset_switch_tht_top"
+    reset_switch: &fp_reset_switch "ceoloide/reset_switch_smd_side"
     power_switch: &fp_power_switch "ceoloide/power_switch_smd_side"
     mounting_hole: &fp_mounting_hole "ceoloide/mounting_hole_plated"
     mounting_hole_npth: &fp_mounting_hole_npth "ceoloide/mounting_hole_npth"
@@ -111,8 +111,12 @@ points.zones:
         key:
           column_net: C5
         rows:
-          home.tags:
-            led: true
+          home:
+            tags:
+              led: true
+            led_prev: LED1
+            led_this: LED1_1
+            led_next: LED1_2
       index.key.column_net: C4
       middle:
         key:
@@ -122,8 +126,12 @@ points.zones:
           spread: 0.5kx + 0.5kx125 + 2
           stagger: 7.425
         rows:
-          home.tags:
-            led: true
+          home:
+            tags:
+              led: true
+            led_prev: LED1_1
+            led_this: LED1_2
+            led_next: LED1_3
       ring:
         key:
           tags:
@@ -139,8 +147,13 @@ points.zones:
           stagger: -7.25
           splay: -2.5
         rows:
-          home.tags:
-            led: true
+          home:
+            tags:
+              led: true
+            led_prev: LED1_2
+            led_this: LED1_3
+            led_next: ''
+
       outer:
         key:
           tags:
@@ -175,12 +188,18 @@ points.zones:
           tags:
             led: true
             key125: true
+          led_prev: LED0
+          led_this: LED0_1
+          led_next: LED0_2
           column_net: C5
       middle:
         key:
           tags:
             led: true
             key125: true
+          led_prev: LED0_1
+          led_this: LED0_2
+          led_next: ''
           column_net: C4
           stagger: 4
           splay: -7
@@ -257,13 +276,13 @@ points.zones:
     key.tags: [helper]
     anchor:
       ref: mcu_bottom_center
-      shift: [0, -2.6/2 - 1.75]
+      shift: [0, -2.6/2 - 1.85]
 
   battery_connector:
     key.tags: [helper]
     anchor:
       ref: mcu_center
-      shift: [-8.5, -28]
+      shift: [-8.5, -28.25]
       rotate: 0
 
   # buttons
@@ -271,13 +290,14 @@ points.zones:
     key.tags: [helper]
     anchor:
       ref: mcu_top_center
-      shift: [0, -0.15]
+      shift: [-2.5, 0.2]
 
   reset_switch:
     key.tags: [helper]
     anchor:
-      ref: battery_connector
-      shift: [3.5, -5.25]
+      ref: power_switch
+      shift: [9.05, -0.325]
+      rotate: 0
 
   # screws
   standoff_right:
@@ -728,7 +748,7 @@ pcbs:
 
       key_switch_1u:
         <<: *key_switch_base
-        where: [[key, -key125, -/^(main|thumb)_inner/]]
+        where: [[key, -key125, -/^(main|thumb)_inner/, -main_pinky_home]]
 
       key_switch_1u_inner:
         <<:
@@ -743,10 +763,20 @@ pcbs:
           - params:
               <<: *key_switch_base_params
               outer_pad_width_back: 2.3
-              LEFTSTAB: "DOUT"
-              RIGHTSTAB: "DIN"
+              LEFTSTAB: "{{led_this}}"
+              RIGHTSTAB: "{{led_prev}}"
           - *key_switch_base
         where: [main_inner_home]
+
+      key_switch_1u_pinky_led:
+        <<:
+          - params:
+              <<: *key_switch_base_params
+              outer_pad_width_back: 2.3
+              LEFTSTAB: "{{led_this}}"
+              RIGHTSTAB: "{{led_prev}}"
+          - *key_switch_base
+        where: [main_pinky_home]
 
       key_switch_1_25u:
         <<:
@@ -761,8 +791,8 @@ pcbs:
           - params:
               <<: *key_switch_base_params
               keycap_3dmodel_xyz_scale: [1.225, 1, 1]
-              LEFTSTAB: "DOUT"
-              RIGHTSTAB: "DIN"
+              LEFTSTAB: "{{led_this}}"
+              RIGHTSTAB: "{{led_prev}}"
           - *key_switch_base
         where: [[key125, led]]
 
@@ -786,7 +816,7 @@ pcbs:
           side: "F"
           reversible: true
           include_tht: false
-          #include_silkscreen: false
+          include_silkscreen: true
         adjust:
           shift: [0, 5.150]
           rotate: 180
@@ -800,7 +830,7 @@ pcbs:
           side: "F"
           reversible: true
           include_tht: false
-          #include_silkscreen: false
+          include_silkscreen: true
         adjust:
           shift: [3.625, 0.750]
           rotate: -90
@@ -814,8 +844,8 @@ pcbs:
           include_traces_vias: false
           include_courtyard: false
           include_keepout: false
-          P2: "DOUT"
-          P4: "DIN"
+          P2: "{{led_this}}"
+          P4: "{{led_prev}}"
         adjust:
           shift: [0, 5]
 
@@ -847,8 +877,8 @@ pcbs:
           mcu_3dmodel_xyz_offset: [-7.6, 12.7, 3.6]
           mcu_3dmodel_xyz_scale: [1, 1, 1]
 
-          P0: DAT
-          P1: LED
+          P0: LED0
+          P1: LED1
           P21: C0
           P20: C1
           P19: C2
@@ -920,11 +950,11 @@ pcbs:
         where: reset_switch
         params:
           reversible: true
-          include_silkscreen: false
-          model_filename: ../../footprints/3dmodels/reset_button.step
-          model_xyz_rotation: [-90, 0, 0]
-          model_xyz_offset: [-3.05, -1.8, 0.05]
-          model_xyz_scale: [1, 1, 1]
+          include_silkscreen: true
+          #model_filename: ../../footprints/3dmodels/reset_button.step
+          #model_xyz_rotation: [-90, 0, 0]
+          #model_xyz_offset: [-3.05, -1.8, 0.05]
+          #model_xyz_scale: [1, 1, 1]
 #        adjust:
 #          rotate: 90
 
@@ -932,11 +962,12 @@ pcbs:
         what: *fp_battery_connector
         where: battery_connector
         params:
+          side: 'F'
           reversible: true
           include_courtyard: false
           include_fabrication: false
           include_traces: true
-          include_silkscreen: false
+          include_silkscreen: true
           BAT_P: "BAT_P"
           model_filename: ../../footprints/3dmodels/battery_connector_JST_PH2.0mm.stpZ
           model_xyz_rotation: [0, 0, 0]
@@ -974,16 +1005,16 @@ pcbs:
           name: 'GND'
           priority: 0
           locked: false
+          connect_pads: "yes"
           corner_smoothing: "none"
           smoothing_radius: 0.5
-          connect_pads: ''
           pad_clearance: 0.3
           min_thickness: 0.3
-          thermal_gap: 0 #0.5
+          thermal_gap: 0.3 #0.5
           thermal_bridge_width: 0.3
           #remove_islands: 'below_area_limit'
           remove_islands: 'never'
-          min_island_size: 2
+          min_island_size: 3
           fill_type: 'hatch'
           hatch_thickness: 0.35
           hatch_gap: 0.75
