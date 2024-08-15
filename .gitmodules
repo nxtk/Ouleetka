@@ -1,0 +1,6 @@
+[submodule "ergogen/footprints/ceoloide"]
+	path = ergogen/footprints/ceoloide
+	url = https://github.com/ceoloide/ergogen-footprints.git
+[submodule "firmware"]
+	path = firmware
+	url = git@github.com:nxtk/ouleetka-firmware.git

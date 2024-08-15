@@ -1,0 +1,1110 @@
+meta:
+  engine: 4.1.0
+  name: ouleetka
+  version: 0.1
+  ref: "ouleetka v0.1"
+  author: nxtk
+  url: https://github.com/nxtk/ouleetka
+
+  footprints:
+    #template: &kicad_template "kicad5"
+    template: &kicad_template "kicad8_1"
+    key_switch: &fp_key_switch ceoloide/switch_choc_v1_v2
+    reset_switch: &fp_reset_switch "ceoloide/reset_switch_smd_side"
+    power_switch: &fp_power_switch "ceoloide/power_switch_smd_side"
+    mounting_hole: &fp_mounting_hole "ceoloide/mounting_hole_plated"
+    mounting_hole_npth: &fp_mounting_hole_npth "ceoloide/mounting_hole_npth"
+    mcu: &fp_mcu "ceoloide/mcu_nice_nano"
+    display_nicenano: &fp_display_niceview "ceoloide/display_nice_view"
+    display_oled: &fp_display_oled "ceoloide/display_ssd1306"
+    battery_connector: &fp_battery_connector "ceoloide/battery_connector_jst_ph_2"
+    diode: &fp_diode "ceoloide/diode_tht_sod123"
+    led: &fp_led "ceoloide/led_sk6812mini-e"
+    fill_zone: &fp_fill_zone "ceoloide/utility_filled_zone"
+
+units:
+  $default_autobind: 0
+  u: 0
+  U: 0
+  cx: 0
+  cy: 0
+
+  tolerance: 0.2
+
+  # Note: 1u for CFX is 16.5 + 0.5 so 17, not choc spaced 17.5
+  # Keycap sizes doesn't include spacing so 1.25U is 17 * 1.25 = 21.25
+  keycap_spacing: 0.5
+
+  # 1u keycap higth and width
+  # cherry: 18 x 18, choc: 16.5 x 17.5, CFX 16.5 x 16.5 (16.3-16.75)
+  kcy: 16.5
+  kcx: 16.5
+
+  # spacing between switch centers for 1u keycaps
+  kx: kcx + keycap_spacing
+  ky: kcx + keycap_spacing
+
+  # spacing between switch centers for 1.25U keycaps
+  kx125: kx * 1.25 + keycap_spacing
+  # 1.25U keycap size (CFX: 21.25)
+  kcx125: kx * 1.25
+
+  # switch cutout hole width; mx, choc v2: 14, choc v1: 13.8
+  kco: 13.8
+
+  # M2 screws, flat head 4.1 mm
+  screw_radius: 1 + tolerance / 2
+  screw_diameter: 2 * screw_radius
+  screw_head_radius: 2.05
+  screw_head_diameter: 2 * screw_head_radius
+
+  # M2 standoffs, 4.2 + 0.2 mm
+  standoff_radius: 2.1 + tolerance / 2
+  standoff_diameter: 2 * standoff_radius
+
+  # MCU
+  mcu_height: 33
+  mcu_width: 18
+
+  # 180 - Hotswap south, led north, 0 - opposite
+  switch_rotation: 180
+
+  # TODO: unused yet, cleanup later
+  # led_pos_x: 0 # Led X position relative to the switch center
+  # led_pos_y: 4.7 # Led Y position relative to the switch center
+  # led_rotation: 0 # Led rotation
+
+  # vertical_underglow_shift: -kx + 7.8 # How much to shift underglow leds tied to keys
+  # vertical_diode_shift: 1.5 # How much to shift to avoid overlap
+  # horizontal_diode_shift: -0.5 kco - 0.85
+
+  # diode_rotation: 0 # Diode rotation
+  # switch_rotation: 180 # Hotswap south, led north
+
+  # top_plate_thickness: 1.3
+  # internal_distance_to_top_plate: 2.2
+
+  # # Physical measures
+  # pwr_trace_width: 0.25 # 1A(0.25mm), 2A(0.8mm)
+  # gnd_trace_width: 0.25
+  # signal_trace_width: 0.15
+  # via_size: 0.56 # JLCPCB min 0.56 | KiCad default 0.8
+  # via_drill: 0.3 # JLCPCB min 0.3 | KiCad default 0.4
+
+  # case_wall_thickness: 0.5
+  # bottom_plate_thickness: 1.0
+  # internal_distance_to_bottom_plate: 4
+
+points.zones:
+  main:
+    anchor:
+      # fix KiCad placement
+      shift: [100, -100]
+    key:
+      tags:
+        key: true
+      spread: kx
+      padding: ky
+      origin: [-0.5kx, -0.5ky]
+    columns:
+      inner:
+        key:
+          column_net: C5
+        rows:
+          home:
+            tags:
+              led: true
+            led_prev: LED1
+            led_this: LED1_1
+            led_next: LED1_2
+      index.key.column_net: C4
+      middle:
+        key:
+          tags:
+            key125: true
+          column_net: C3
+          spread: 0.5kx + 0.5kx125 + 2
+          stagger: 7.425
+        rows:
+          home:
+            tags:
+              led: true
+            led_prev: LED1_1
+            led_this: LED1_2
+            led_next: LED1_3
+      ring:
+        key:
+          tags:
+            key125: true
+          column_net: C2
+          spread: kx125 + 0.75 #- 0.25
+          stagger: -1.65
+          splay: -2.5
+      pinky:
+        key:
+          column_net: C1
+          spread: kx + 3.5
+          stagger: -7.25
+          splay: -2.5
+        rows:
+          home:
+            tags:
+              led: true
+            led_prev: LED1_2
+            led_this: LED1_3
+            led_next: ''
+
+      outer:
+        key:
+          tags:
+            key125: true
+          column_net: C0
+          stagger: 6
+          spread: kx
+          padding: kcx125 + 0.5
+        rows:
+          top.skip: true
+          home.adjust.rotate: -90
+          bottom.adjust.rotate: -90
+    rows:
+      bottom.row_net: R2
+      home.row_net: R1
+      top.row_net: R0
+
+  thumb:
+    anchor:
+      ref: main_inner_bottom
+      shift: [-1.175kx, -1.8ky + 0.4]
+      rotate: 16
+    key:
+      tags: 
+        key: true
+      padding: kx
+      origin: [-0.5kx, -0.5ky]
+      rotate: 90
+    columns:
+      outer:
+        key:
+          tags:
+            led: true
+            key125: true
+          led_prev: LED0
+          led_this: LED0_1
+          led_next: LED0_2
+          column_net: C5
+      middle:
+        key:
+          tags:
+            led: true
+            key125: true
+          led_prev: LED0_1
+          led_this: LED0_2
+          led_next: ''
+          column_net: C4
+          stagger: 4
+          splay: -7
+          spread: ky + -0.2
+      inner:
+        key:
+          column_net: C3
+          stagger: 5.5
+          splay: -13
+          shift: [-0.85, -1]
+          spread: ky + 0.5
+          rotate: 180
+    rows:
+      default.row_net: R3
+
+  # viewport fix
+  svg_viewport_fix1:
+    key.tags: [viewport_fix]
+    anchor:
+      ref: main_inner_top
+      shift: [-45, 25]
+
+  svg_viewport_fix2:
+    key.tags: [viewport_fix]
+    anchor:
+      ref: svg_viewport_fix1
+      shift: [0, -105]
+
+  # mcu
+  mcu_center:
+    key.tags: [helper]
+    anchor:
+      ref: main_inner_top
+      shift: [-19.2, -13]
+
+  mcu_top_right:
+    key.tags: [helper]
+    anchor:
+      ref: mcu_center
+      shift: [mcu_width / 2, mcu_height / 2]
+
+  mcu_top_left:
+    key.tags: [helper]
+    anchor:
+      ref: mcu_center
+      shift: [mcu_width / -2, mcu_height / 2]
+
+  mcu_bottom_right:
+    key.tags: [helper]
+    anchor:
+      ref: mcu_top_right
+      shift: [0, -mcu_height]
+
+  mcu_bottom_left:
+    key.tags: [helper]
+    anchor:
+      ref: mcu_top_left
+      shift: [0, -mcu_height]
+
+  mcu_top_center:
+    key.tags: [helper]
+    anchor.aggregate.parts:
+      - mcu_top_left
+      - mcu_top_right
+
+  mcu_bottom_center:
+    key.tags: [helper]
+    anchor.aggregate.parts:
+      - mcu_bottom_left
+      - mcu_bottom_right
+
+  # connectors
+  display_header:
+    key.tags: [helper]
+    anchor:
+      ref: mcu_bottom_center
+      shift: [0, -3.32]
+
+  battery_connector:
+    key.tags: [helper]
+    anchor:
+      ref: mcu_center
+      shift: [5.5, -25]
+      rotate: 180
+
+  # buttons
+  power_switch:
+    key.tags: [helper]
+    anchor:
+      ref: mcu_top_center
+      shift: [-3, 0]
+
+  reset_switch:
+    key.tags: [helper]
+    anchor:
+      ref: power_switch
+      shift: [9.05, -0.1]
+      rotate: 0
+
+  # screws
+  standoff_right:
+    key.tags: [helper, standoff]
+    anchor:
+      ref: main_inner_bottom
+      shift: [-14, -19.675]
+
+  standoff_mid:
+    key.tags: [helper, standoff]
+    anchor:
+      aggregate.parts:
+        - main_middle_home
+        - main_middle_bottom
+      shift: [-8.75, 0]
+
+  standoff_left:
+    key.tags: [helper, standoff]
+    anchor:
+      ref: main_pinky_home
+      shift: [9.337, 0.5]
+
+  screw_inner_top:
+    key.tags: [helper, screw]
+    anchor:
+      ref: main_inner_top
+      shift: [8.5, 8]
+
+  screw_inner_bottom:
+    key.tags: [helper, screw]
+    anchor:
+      ref: main_inner_bottom
+      shift: [7, -27.5]
+
+  screw_middle_top:
+    key.tags: [helper, screw]
+    anchor:
+      ref: main_middle_top
+      shift: [12, 2.5]
+
+  screw_middle_bottom:
+    key.tags: [helper, screw]
+    anchor:
+      ref: main_middle_bottom
+      shift: [12, -15.350]
+
+  screw_right_top:
+    key.tags: [helper, screw]
+    anchor:
+      ref: main_middle_home
+      shift: [66.741, 7.425]
+
+  screw_mcu_middle:
+    key.tags: [helper, screw]
+    anchor:
+      ref: main_inner_home
+      shift: [-26.200, -21]
+
+  screw_right_bottom:
+    key.tags: [helper, screw]
+    anchor:
+      ref: main_middle_bottom
+      shift: [63.254, -15.350]
+
+outlines:
+  _viewport_fix:
+    - what: rectangle
+      where: [viewport_fix]
+      size: 5
+
+  _grid:
+    # 1u
+    - what: rectangle
+      where: [/^main_(?!middle|ring|outer).*/, thumb_inner]
+      size: [kx, ky]
+      operation: stack
+      # 1.25u vertical
+    - what: rectangle
+      where: [/^main_(middle|ring|outer).*/, thumb_outer, thumb_middle]
+      size: [kx125, ky]
+      operation: stack
+
+  _keycaps:
+    # stem
+    - what: rectangle
+      where: [key]
+      size: [10, 4]
+      adjust:
+        shift: [0, 0]
+    - what: rectangle
+      where: [key]
+      size: [3.2, 4]
+      adjust:
+        shift: [0, -1.2]
+    - what: circle
+      where: [key]
+      operation: stack
+      radius: 1.6
+    - what: rectangle
+      where: [key]
+      operation: stack
+      size: [1.2, 3]
+      adjust:
+        shift: [-2.85, 0]
+    - what: rectangle
+      where: [key]
+      operation: stack
+      size: [1.2, 3]
+      adjust:
+        shift: [2.85, 0]
+      # 1u
+    - what: rectangle
+      where: [/^main_(?!outer|ring|middle).*/, thumb_inner]
+      operation: stack
+      size: [kcx, kcy]
+      corner: 1.5
+    - what: rectangle
+      where: [/^main_(?!middle|ring|outer).*/, thumb_inner]
+      operation: stack
+      size: [kcx - 2.5, kcy - 2.5]
+      corner: 1
+      # 1.25u
+    - what: rectangle
+      where: [/^main_(middle|ring|outer).*/, thumb_outer, thumb_middle]
+      operation: stack
+      size: [kcx125, kcy]
+      corner: 1.5
+    - what: rectangle
+      where: [/^main_(middle|ring|outer).*/, thumb_outer, thumb_middle]
+      operation: stack
+      size: [kcx125 - 2.5, kcy - 2.5]
+      corner: 1
+
+  _debug_points:
+    - what: rectangle
+      where: true
+      size: [3, 0.01]
+      adjust:
+        rotate: 45
+    - what: rectangle
+      where: true
+      size: [0.01, 3]
+      adjust:
+        rotate: 45
+      operation: stack
+    - what: circle
+      where: true
+      radius: 0.4
+      adjust:
+        shift: [1.15, 1.15]
+
+  _standoffs:
+    - what: circle
+      where: [standoff]
+      radius: standoff_radius
+
+  _screws:
+    - what: circle
+      where: [screw]
+      radius: screw_radius
+
+  _screwheads:
+    - what: circle
+      where: [screw, standoff]
+      radius: screw_head_radius
+
+  _switches:
+    - what: rectangle
+      where: [key]
+      size: 15
+
+  _switch_cutouts:
+    - what: rectangle
+      where: [key]
+      size: kco
+
+  _mcu:
+    - what: rectangle
+      where: mcu_center
+      size: [mcu_width, mcu_height]
+      fillet: 1.75
+
+  _display:
+    # - what: rectangle
+    #   where: display_header
+    #   operation: stack
+    #   size: [14, 36]
+    #   adjust:
+    #     shift: [0, 36/2 - 1.3]
+    - what: rectangle
+      where: display_header
+      operation: stack
+      size: [12, 38]
+      adjust:
+        shift: [0, 38/2 - 3.3]
+    # - what: rectangle
+    #   where: display_header
+    #   operation: stack
+    #   size: [12.820, 2.6]
+    - what: rectangle
+      where: display_header
+      operation: stack
+      size: [10.280, 2.6]
+      adjust:
+        shift: [0, -2]
+
+  _battery_connector:
+    - what: rectangle
+      where: battery_connector
+      size: [7.75, 6]
+      adjust:
+        shift: [8/2 - 1.5, 0]
+
+  _power_switch:
+    - what: rectangle
+      where: power_switch
+      size: [8.8, 4.55]
+      adjust:
+        shift: [0, -4.55/2 + 1.795]
+
+  _reset_switch:
+    - what: rectangle
+      where: reset_switch
+      size: [5.95, 3.5]
+
+  stuff:
+    - ^_keycaps
+    - ^_mcu
+    #- ^_display
+    #- ^_debug_points
+    - ^_battery_connector
+    - ^_power_switch
+    - ^_reset_switch
+    - ^_screws
+    - ^_standoffs
+    - ^_screwheads
+
+  _main_raw:
+    - what: rectangle
+      where: main_inner_home
+      size: [180, 150]
+      adjust:
+        shift: [40, 40]
+    - what: circle
+      where: main_middle_home
+      operation: intersect
+      radius: 190
+      adjust:
+        shift: [-1, -164.5]
+    - what: rectangle
+      where: main_inner_home
+      operation: subtract
+      size: [50, 70]
+      adjust:
+        shift: [-0.5kx - 50/2 + 0.25, 0]
+    - what: rectangle
+      where: main_outer_home
+      operation: subtract
+      size: [70, 30]
+      adjust:
+        shift: [10, 30/2 + 0.5ky - 0.65]
+    # - what: circle
+    #   where: main_middle_top
+    #   operation: subtract
+    #   radius: 200
+    #   adjust:
+    #     shift: [114, 188.3]
+    # - what: circle
+    #   where: main_middle_top
+    #   operation: subtract
+    #   radius: 115
+    #   adjust:
+    #     shift: [-52, 115.25]
+
+  _mcu_addon_raw:
+    - what: rectangle
+      where: main_inner_home
+      size: [24, 64]
+      adjust:
+        shift: [-0.5kx - 22.9 / 2 + 1, -10]
+    - what: rectangle
+      where: thumb_outer
+      operation: subtract
+      size: [60, 20]
+      adjust:
+        shift: [15, 20/2 + 0.5ky - 0.7]
+
+  _thumb_addon_raw:
+    - what: circle
+      where: main_middle_home
+      radius: 140
+      adjust:
+        shift: [-87.5, 71.25]
+      operation: stack
+    - what: rectangle
+      where: main_inner_home
+      size: [350, 250]
+      adjust:
+        shift: [-35, 115]
+      operation: subtract
+    - what: rectangle
+      where: main_inner_bottom
+      size: [135, 70]
+      adjust:
+        shift: [-100, -20]
+      operation: subtract
+    - what: rectangle
+      where: thumb_outer
+      operation: subtract
+      size: [40, 20]
+      adjust:
+        shift: [5, 20/2 + 0.5ky - 0.7]
+    - what: circle
+      where: main_inner_home
+      radius: 30
+      operation: subtract
+      adjust:
+        shift: [-37.85, -10.35]
+
+  _top_plate_raw:
+    - _main_raw
+    - _thumb_addon_raw
+    - what: circle
+      where: main_middle_bottom
+      radius: 57
+      operation: subtract
+      adjust:
+        shift: [19.5, -76.5]
+    - what: rectangle
+      where: main_middle_bottom
+      operation: subtract
+      size: [50, 20]
+      adjust:
+        shift: [47, -30]
+        rotate: -1
+    - what: rectangle
+      where: main_middle_bottom
+      operation: subtract
+      size: [10, 5]
+      adjust:
+        shift: [-13, -33.1]
+        rotate: 32
+
+  _top_plate0:
+    - what: outline
+      name: _top_plate_raw
+      fillet: 1.5
+
+  _top_plate1:
+    - what: outline
+      name: _top_plate0
+      expand: 0.5
+
+  top_plate:
+    - ^_top_plate1
+    - -_switch_cutouts
+
+  _curve_left_side:
+    - what: circle
+      where: main_inner_home
+      radius: 300
+      adjust:
+        shift: [-329, -14]
+    - what: rectangle
+      where: main_inner_home
+      operation: add
+      size: [10, 50]
+      adjust:
+        shift: [-34, 10]
+
+  _pcb_raw:
+    - _top_plate_raw
+    - _mcu_addon_raw
+    - -_curve_left_side
+
+  _pcb0:
+    - what: outline
+      name: _pcb_raw
+      fillet: 1.5
+
+  _pcb1:
+    - what: outline
+      name: _pcb0
+      expand: 0.5
+      fillet: 0.5
+
+  pcb:
+    - ^_pcb1
+
+  fill_zone:
+    - what: outline
+      name: pcb
+      expand: 1
+
+  debug_preview:
+    #- ^_viewport_fix
+    - ^_debug_points
+    - ^_grid
+    - ^stuff
+    - ^_pcb_raw
+
+  preview:
+    #- ^_viewport_fix
+    - ^stuff
+    - ^pcb
+
+pcbs:
+  ouleetka:
+    outlines:
+      main:
+        outline: pcb
+        layer: Edge.Cuts
+      top_plate:
+        outline: top_plate
+        layer: Dwgs.User
+      stuff:
+        outline: stuff
+        layer: Dwgs.User
+    template: *kicad_template
+    footprints:
+      key_switch_base: &key_switch_base
+        what: *fp_key_switch
+        where: false
+        params: &key_switch_base_params
+          from: "{{column_net}}"
+          to: "{{row_net}}S"
+          LEFTSTAB: "{{row_net}}"
+          RIGHTSTAB: "{{row_net}}S"
+          keycap_width: kcx
+          keycap_height: kcy
+          choc_v1_stabilizers_diameter: 1.75
+          reversible: true
+          include_plated_holes: true
+          include_corner_marks: true
+          include_stabilizer_nets: true
+          include_centerhole_net: true
+          switch_3dmodel_filename: ../../footprints/3dmodels/switch_kailh_choc_v1_purple.step
+          switch_3dmodel_xyz_rotation: [0, 0, 0]
+          switch_3dmodel_xyz_offset: [0, 0, 0]
+          hotswap_3dmodel_filename: ../../footprints/3dmodels/hotswap_kailh_choc_v1.step
+          hotswap_3dmodel_xyz_offset: [0, 0, 0]
+          keycap_3dmodel_filename: ../../footprints/3dmodels/keycap_mbk_1_black.stpZ
+          keycap_3dmodel_xyz_rotation: [0, 0, 0]
+          keycap_3dmodel_xyz_offset: [0, 0, 0]
+          keycap_3dmodel_xyz_scale: [0.945, 1, 1]
+        adjust:
+          rotate: switch_rotation
+
+      key_switch_1u:
+        <<: *key_switch_base
+        where: [[key, -key125, -/^(main|thumb)_inner/, -main_pinky_home]]
+
+      key_switch_1u_inner:
+        <<:
+          - params:
+              <<: *key_switch_base_params
+              outer_pad_width_back: 2.3
+          - *key_switch_base
+        where: [[/^(main|thumb)_inner/, -/^main_inner_home/]]
+
+      key_switch_1u_inner_led:
+        <<:
+          - params:
+              <<: *key_switch_base_params
+              outer_pad_width_back: 2.3
+              LEFTSTAB: "{{led_this}}"
+              RIGHTSTAB: "{{led_prev}}"
+          - *key_switch_base
+        where: [main_inner_home]
+
+      key_switch_1u_pinky_led:
+        <<:
+          - params:
+              <<: *key_switch_base_params
+              outer_pad_width_back: 2.3
+              LEFTSTAB: "{{led_this}}"
+              RIGHTSTAB: "{{led_prev}}"
+          - *key_switch_base
+        where: [main_pinky_home]
+
+      key_switch_1_25u:
+        <<:
+          - params:
+              <<: *key_switch_base_params
+              keycap_3dmodel_xyz_scale: [1.225, 1, 1]
+          - *key_switch_base
+        where: [[key125, -/^thumb/, -led]]
+
+      key_switch_1_25u_led:
+        <<:
+          - params:
+              <<: *key_switch_base_params
+              keycap_3dmodel_xyz_scale: [1.225, 1, 1]
+              LEFTSTAB: "{{led_this}}"
+              RIGHTSTAB: "{{led_prev}}"
+          - *key_switch_base
+        where: [[key125, led]]
+
+      # key_switch_125u_thumb:
+      #   <<:
+      #     - params:
+      #         <<: *key_switch_base_params
+      #         #keycap_3dmodel_filename: ../../footprints/3dmodels/keycap_mbk_15_black.stpZ
+      #         keycap_3dmodel_xyz_scale: [0.82, 1, 1]
+      #         LEFTSTAB: "DOUT"
+      #         RIGHTSTAB: "DIN"
+      #     - *key_switch_base
+      #   where: [thumb_outer, thumb_middle]
+
+      key_diode:
+        what: *fp_diode
+        where: [[key, -led]]
+        params:
+          from: "{{row_net}}S"
+          to: "{{row_net}}"
+          side: "F"
+          reversible: true
+          include_tht: false
+          include_silkscreen: true
+        adjust:
+          shift: [0, 5.150]
+          rotate: 180
+
+      key_diode_ledkey:
+        what: *fp_diode
+        where: [[key, led]]
+        params:
+          from: "{{row_net}}S"
+          to: "{{row_net}}"
+          side: "F"
+          reversible: true
+          include_tht: false
+          include_silkscreen: true
+        adjust:
+          shift: [3.625, 0.750]
+          rotate: -90
+
+      led:
+        what: *fp_led
+        where: [led]
+        params:
+          side: "B"
+          reversible: true
+          reverse_mount: false # false for underglow
+          include_traces_vias: false
+          include_courtyard: false
+          include_keepout: false
+          P2: "{{led_this}}"
+          P4: "{{led_prev}}"
+        adjust:
+          shift: [0, 5]
+
+      mcu:
+        what: *fp_mcu
+        where: mcu_center
+        adjust:
+          shift: [0, 0.07]
+        params:
+          via_size: 0.8
+          via_drill: 0.4
+          only_required_jumpers: false
+          use_rectangular_jumpers: false
+          include_extra_pins: false
+          include_traces: true
+
+          designator: "MCU"
+          side: "F"
+          reversible: true
+          reverse_mount: true # true for MCU facing down
+          show_silk_labels: true
+          show_silk_labels_on_both_sides: true
+          show_via_labels: true
+          show_instructions: false
+
+
+          mcu_3dmodel_filename: ../../footprints/3dmodels/pro_micro.stpZ
+          mcu_3dmodel_xyz_rotation: [-90, 0, 90]
+          mcu_3dmodel_xyz_offset: [-7.6, 12.7, 3.6]
+          mcu_3dmodel_xyz_scale: [1, 1, 1]
+
+          P0: LED0
+          P1: LED1
+          P21: C5
+          P20: C4
+          P19: C3
+          P18: C2
+          P15: C1
+          P14: C0
+          P2: SDA
+          P3: SCL
+          P4: CS
+          P5: R0
+          P6: R1
+          P7: R2
+          P8: R3
+
+      display_header_niceview:
+        what: *fp_display_niceview
+        where: false #display_header
+        adjust:
+          shift: [0, 16.710]
+        params:
+          reversible: true
+          include_traces: true
+          include_labels: true
+          include_courtyard: false
+          include_silkscreen: false
+          MOSI: SDA
+          SCK: SCL
+          #model_filename: ../../footprints/3dmodels/PinHeader_1x05_P2.54mm_Vertical.step
+          model_xyz_rotation: [0, 0, 90]
+          model_xyz_offset: [5.1, -16.7, 0.03]
+          model_xyz_scale: [1, 1, 1]
+
+      display_header_oled:
+        what: *fp_display_oled
+        where: display_header
+        adjust:
+          shift: [0, 16.7]
+        params:
+          reversible: true
+          include_traces: true
+          invert_jumpers_position: false
+          include_labels: true
+          #model_filename: ../../footprints/3dmodels/PinHeader_1x04_P2.54mm_Vertical.step
+          #model_xyz_rotation: [0, 0, 90]
+          #model_xyz_offset: [3.8, -16.7, 0.03]
+          #model_xyz_scale: [1, 1, 1]
+          model_filename: ../../footprints/3dmodels/oled.step
+          model_xyz_rotation: [0, 0, -90]
+          model_xyz_offset: [0, 1, 8.5]
+          model_xyz_scale: [1, 1, 1]
+
+      power_switch:
+        what: *fp_power_switch
+        where: power_switch
+        params:
+          reversible: true
+          include_silkscreen: true
+          include_courtyard: false
+          invert_behavior: false
+          switch_3dmodel_filename: ../../footprints/3dmodels/pcm12smtr.step
+          switch_3dmodel_xyz_rotation: [0.03, 0, -90]
+          switch_3dmodel_xyz_offset: [0, 0, 0]
+          switch_3dmodel_xyz_scale: [1, 1.2, 1]
+        adjust:
+          rotate: 90
+
+      reset_switch:
+        what: *fp_reset_switch
+        where: reset_switch
+        params:
+          reversible: true
+          include_silkscreen: true
+          #model_filename: ../../footprints/3dmodels/reset_button.step
+          #model_xyz_rotation: [-90, 0, 0]
+          #model_xyz_offset: [-3.05, -1.8, 0.05]
+          #model_xyz_scale: [1, 1, 1]
+#        adjust:
+#          rotate: 90
+
+      battery_connector:
+        what: *fp_battery_connector
+        where: battery_connector
+        params:
+          side: 'F'
+          reversible: true
+          include_courtyard: false
+          include_fabrication: false
+          #include_traces: true
+          include_silkscreen: true
+          BAT_P: "BAT_P"
+          include_model_socket: true
+          include_model_plug: true
+          models_dir: ../../footprints/3dmodels/
+          model_socket_filename: battery_connector_JST_PH2.0mm.stpZ
+          model_socket_rotation: [0, 0, 0]
+          model_socket_offset: [0, 0, 0]
+          model_socket_scale: [1, 1, 1]
+          #model_plug_rotation: [0, 0, 0]
+          #model_plug_offset: [0, 0, 0]
+          #model_plug_scale: [1, 1, 1]
+        adjust:
+          rotate: 90
+
+      screws:
+        what: *fp_mounting_hole
+        where: [screw]
+        params:
+          designator: "MH"
+          side: "F"
+          outline: screw_head_radius - screw_radius
+          drill: screw_diameter
+          drill_y: 0
+          include_courtyard: false
+
+      standoffs:
+        what: *fp_mounting_hole_npth
+        where: [standoff]
+        params:
+          designator: "SH"
+          side: "F"
+          hole_size: standoff_diameter
+          hole_drill: standoff_diameter
+
+      gnd_fill_zone:
+        what: *fp_fill_zone
+        where: main_index_home
+        params:
+          side: "F&B"
+          net: "GND"
+          name: 'GND'
+          priority: 0
+          locked: false
+          connect_pads: "yes"
+          corner_smoothing: "none"
+          smoothing_radius: 0.5
+          pad_clearance: 0.25
+          min_thickness: 0.25
+          thermal_gap: 0.25 #0.5
+          thermal_bridge_width: 0.25
+          remove_islands: 'below_area_limit'
+          #remove_islands: 'never'
+          min_island_size: 2
+          fill_type: 'hatch'
+          hatch_thickness: 0.25
+          hatch_gap: 0.8
+          hatch_orientation: 30
+          hatch_smoothing_level: 3
+          hatch_smoothing_value: 0.4
+          points: [[160.580897, 112.639833], [159.841493, 112.606787], [158.361567, 112.574651], [156.881306, 112.581295],
+                   [155.401728, 112.626713], [153.923847, 112.710876], [152.448678, 112.833724], [150.977233, 112.995174],
+                   [149.510522, 113.195114], [148.049553, 113.433408], [146.595328, 113.709893], [145.148844, 114.024377],
+                   [143.711095, 114.376646], [142.283067, 114.766458], [140.865742, 115.193544], [139.46009, 115.657613],
+                   [138.067078, 116.158345], [136.687661, 116.695397], [135.322786, 117.2684], [133.973391, 117.876961],
+                   [132.6404, 118.520662], [131.324729, 119.199062], [130.027281, 119.911694], [128.748947, 120.65807],
+                   [127.490603, 121.437677], [126.253114, 122.24998], [125.03733, 123.094422], [123.844083, 123.970424],
+                   [122.674194, 124.877383], [122.099807, 125.344169], [122.050288, 125.384064], [121.946936, 125.458174],
+                   [121.893262, 125.492275], [120.581877, 126.311719], [120.513315, 126.352682], [119.495776, 126.930567],
+                   [117.444069, 128.056544], [115.373892, 129.14819], [113.285819, 130.205203], [111.180429, 131.22729],
+                   [109.058307, 132.214166], [106.920042, 133.165557], [104.766226, 134.081201], [102.597457, 134.960842],
+                   [100.414338, 135.804237], [98.217474, 136.611152], [96.007473, 137.381363], [93.784951, 138.114656],
+                   [91.550522, 138.810827], [89.304808, 139.469684], [87.048431, 140.091044], [84.782017, 140.674734],
+                   [82.506195, 141.220593], [80.221597, 141.728468], [77.928857, 142.19822], [76.779182, 142.416359],
+                   [76.646769, 142.439079], [76.378457, 142.452825], [76.11072, 142.430526], [75.848379, 142.372584],
+                   [75.596156, 142.280043], [75.358593, 142.154568], [75.139966, 141.998418], [74.944213, 141.814405],
+                   [74.774856, 141.605841], [74.634946, 141.376482], [74.527002, 141.130458], [74.487915, 141.00192],
+                   [74.487828, 141.001616], [69.461182, 123.471616], [69.429277, 123.354046], [69.391072, 123.11344],
+                   [69.382377, 122.869975], [69.39113, 122.748468], [69.540712, 120.984652], [69.803363, 117.454119],
+                   [70.024262, 113.920727], [70.203381, 110.384971], [70.340693, 106.847345], [70.436179, 103.308343],
+                   [70.489826, 99.768459], [70.498336, 97.998333], [70.5, 97.959207], [70.5, 62.5], [70.502453, 62.357133],
+                   [70.543117, 62.074306], [70.623618, 61.800146], [70.742316, 61.540232], [70.896796, 61.299857],
+                   [71.083913, 61.083913], [71.299857, 60.896796], [71.540232, 60.742316], [71.800146, 60.623618],
+                   [72.074306, 60.543117], [72.357133, 60.502453], [72.5, 60.5], [90.25, 60.5], [90.348272, 60.497773],
+                   [90.54104, 60.459429], [90.722623, 60.384215], [90.886043, 60.275021], [91.025021, 60.136043],
+                   [91.134215, 59.972623], [91.209429, 59.79104], [91.247773, 59.598272], [91.25, 59.5], [91.25, 56.8123],
+                   [91.252134, 56.67879], [91.287661, 56.414144], [91.358085, 56.156578], [91.462151, 55.910671],
+                   [91.598011, 55.680798], [91.763248, 55.471045], [91.954924, 55.285141], [92.169631, 55.126394],
+                   [92.40355, 54.997624], [92.652523, 54.901124], [92.78183, 54.867821], [94.124228, 54.547169],
+                   [96.816938, 53.939971], [99.518163, 53.371852], [102.227336, 52.842932], [104.943888, 52.353322],
+                   [107.667249, 51.903124], [110.396848, 51.492432], [113.13211, 51.121334], [115.872463, 50.789907],
+                   [118.61733, 50.498221], [121.366135, 50.246336], [124.118301, 50.034306], [126.87325, 49.862175],
+                   [129.630404, 49.72998], [132.389185, 49.637747], [135.149012, 49.585498], [137.909306, 49.573241],
+                   [140.669488, 49.600981], [143.428979, 49.668711], [146.187198, 49.776417], [148.943567, 49.924076],
+                   [151.697508, 50.111658], [154.448441, 50.339123], [157.19579, 50.606423], [159.938978, 50.913502],
+                   [162.677428, 51.260295], [165.410566, 51.646731], [168.137818, 52.072727], [170.858611, 52.538195],
+                   [173.572374, 53.043036], [176.278537, 53.587144], [178.976533, 54.170406], [181.665794, 54.792699],
+                   [184.345757, 55.453892], [187.015858, 56.153846], [189.675537, 56.892415], [192.324235, 57.669443],
+                   [194.961396, 58.484768], [197.586468, 59.338217], [200.198898, 60.229612], [202.798137, 61.158767],
+                   [205.383642, 62.125484], [207.954867, 63.129563], [209.234011, 63.647869], [209.36401, 63.703347],
+                   [209.608158, 63.845754], [209.829825, 64.021116], [210.024597, 64.225938], [210.188592, 64.456142],
+                   [210.318545, 64.707141], [210.411866, 64.973935], [210.466698, 65.251211], [210.481946, 65.533444],
+                   [210.471976, 65.674434], [210.471936, 65.674879], [206.455696, 111.580721], [206.441552, 111.717315],
+                   [206.380408, 111.985035], [206.283215, 112.241874], [206.151801, 112.483004], [205.988638, 112.703889],
+                   [205.796792, 112.900378], [205.57987, 113.068776], [205.341952, 113.205917], [205.08751, 113.309223],
+                   [204.821328, 113.376751], [204.548411, 113.407231], [204.411094, 113.405829], [160.642139, 112.64184],
+                   [160.581211, 112.639848]]
+
+      gnd_solid_fill_zone:
+        what: *fp_fill_zone
+        where: main_index_home
+        params:
+          side: "F&B"
+          net: "GND"
+          name: 'zone_mcu_solid'
+          priority: 1
+          locked: false
+          connect_pads: "yes"
+          corner_smoothing: "none"
+          smoothing_radius: 0.5
+          pad_clearance: 0.25
+          min_thickness: 0.25
+          thermal_gap: 0.25 #0.5
+          thermal_bridge_width: 0.25
+          #remove_islands: 'below_area_limit'
+          remove_islands: 'always'
+          min_island_size: 2
+          fill_type: 'solid'
+          hatch_thickness: 0.25
+          hatch_gap: 0.8
+          hatch_orientation: 30
+          hatch_smoothing_level: 3
+          hatch_smoothing_value: 0.4
+          points: [[72.411565, 60.5], [72.268925, 60.508507], [71.988109, 60.561374], [71.717675, 60.653666],
+                   [71.463129, 60.783506], [71.229651, 60.94825], [71.021995, 61.144544], [70.844389, 61.368393],
+                   [70.700447, 61.615239], [70.5931, 61.880058], [70.524534, 62.157459], [70.496144, 62.441794],
+                   [70.5, 62.584635], [70.5, 100.6], [89.1, 100.6], [89.217877, 100.597765],
+                   [89.450727, 100.560885], [89.674942, 100.488033], [89.885, 100.381004], [90.075728, 100.242431],
+                   [90.242431, 100.075728], [90.381004, 99.885], [90.488033, 99.674942], [90.560885, 99.450727],
+                   [90.597765, 99.217877], [90.6, 99.1], [90.6, 60.5]]
